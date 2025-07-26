@@ -30,20 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Fermer le menu si un lien de navigation est cliqué
+        // Cette partie est CRUCIALE pour que les liens fonctionnent normalement.
+        // Elle s'assure que le menu se ferme ET que le lien est suivi.
         mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                // Cette condition assure que le menu se ferme quand un lien est cliqué
-                // peu importe la taille de l'écran, tant que le menu est ouvert.
+            link.addEventListener('click', (event) => { // Ajout de 'event' ici
+                // Ferme le menu seulement si le menu est ouvert (active)
                 if (hamburgerMenu.classList.contains('active')) {
                     hamburgerMenu.classList.remove('active');
                     mainNav.classList.remove('active');
                     overlay.classList.remove('active');
                     document.body.classList.remove('no-scroll');
                 }
+                // L'action par défaut du lien (naviguer vers le href) se produit automatiquement après.
+                // Pas besoin de event.preventDefault() sauf si vous voulez bloquer la navigation.
+                // Si vous avez event.preventDefault() quelque part, retirez-le !
             });
         });
     }
+
+    // ... (reste du code pour la recherche et la gestion de la classe active)
 
     if (searchInput && bookListContainer) {
         searchInput.addEventListener('keyup', (event) => {
