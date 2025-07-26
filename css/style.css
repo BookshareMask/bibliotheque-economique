@@ -60,7 +60,7 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* --- Styles du Header (Mobile-First par défaut) --- */
+/* --- Styles du Header --- */
 header {
     background: var(--header-gradient);
     color: #fff;
@@ -78,10 +78,10 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Conteneur du contenu de l'en-tête - Flexbox par défaut en colonne (mobile) */
+/* Conteneur du contenu de l'en-tête */
 .header-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Par défaut en colonne */
     align-items: center;
     gap: 20px;
 }
@@ -106,9 +106,9 @@ header p {
     font-weight: 300;
 }
 
-/* --- Menu Hamburger (Mobile) --- */
+/* --- Menu Hamburger (Toujours visible et actif) --- */
 .hamburger-menu {
-    display: none; /* Sera affiché via media query pour mobile */
+    display: flex; /* Toujours affiché */
     width: 40px;
     height: 30px;
     background: none;
@@ -117,14 +117,17 @@ header p {
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
-    z-index: 200; /* Assure qu'il est au-dessus du menu */
+    z-index: 200;
+    position: absolute; /* Positionné absolument dans le header */
+    top: 25px;
+    right: 20px;
 }
 
 .hamburger-menu .bar {
     display: block;
     width: 100%;
     height: 4px;
-    background-color: #fff; /* Les barres doivent être blanches */
+    background-color: #fff;
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
 }
@@ -134,15 +137,15 @@ header p {
 .hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
 .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-13px) rotate(-45deg); }
 
-/* --- Navigation Principale (main-nav) - Styles par défaut (mobile-first) --- */
+
+/* --- Navigation Principale (main-nav) - Toujours en mode latéral --- */
 .main-nav {
-    /* Par défaut, c'est le style mobile, car mobile-first */
     position: fixed;
     top: 0;
-    left: -280px; /* Caché hors de l'écran */
+    left: -280px; /* Caché hors de l'écran par défaut */
     width: 280px;
     height: 100%;
-    background-color: var(--menu-bg-color); /* Fond du menu latéral */
+    background-color: var(--menu-bg-color);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
     transition: left 0.4s ease-in-out;
     z-index: 150;
@@ -151,16 +154,16 @@ header p {
     border-right: 5px solid var(--accent-color);
 }
 .main-nav.active {
-    left: 0; /* Menu visible */
+    left: 0; /* Visible quand actif */
 }
 
 .main-nav ul {
     list-style: none;
     display: flex;
-    flex-direction: column; /* Liens verticaux pour le menu mobile */
-    align-items: flex-start; /* Alignement à gauche */
+    flex-direction: column; /* Liens toujours verticaux */
+    align-items: flex-start;
     padding: 20px;
-    gap: 10px; /* Espacement entre les liens */
+    gap: 10px;
 }
 
 .main-nav ul li {
@@ -168,7 +171,7 @@ header p {
 }
 
 .main-nav ul li a {
-    color: #fff; /* Couleur des liens du menu mobile */
+    color: #fff;
     font-weight: 600;
     padding: 12px 15px;
     border-radius: 8px;
@@ -177,15 +180,15 @@ header p {
     align-items: center;
     gap: 10px;
     font-size: 1.05em;
-    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent pour les liens */
-    border: none; /* Pas de bordure pour les liens mobiles */
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
 }
 
 .main-nav ul li a:hover, .main-nav ul li a.active {
     background-color: rgba(255, 255, 255, 0.25);
-    transform: none; /* Pas de translation sur mobile */
+    transform: none;
     box-shadow: none;
-    color: #fff; /* Assurer que la couleur reste blanche au survol */
+    color: #fff;
 }
 
 /* --- Barre de recherche --- */
@@ -193,7 +196,7 @@ header p {
     position: relative;
     max-width: 600px;
     width: 100%;
-    order: 3; /* Sur mobile, la recherche est en bas */
+    order: 3; /* Positionnement en bas dans la colonne du header-content */
 }
 
 #searchInput {
@@ -229,7 +232,7 @@ header p {
     opacity: 0.7;
 }
 
-/* Overlay pour cacher le reste de la page quand le menu est ouvert (mobile uniquement) */
+/* Overlay pour cacher le reste de la page quand le menu est ouvert */
 .overlay {
     display: none;
     position: fixed;
@@ -426,19 +429,20 @@ footer {
 
 /* Styles pour les écrans larges (PC : min-width 993px et plus) */
 @media (min-width: 993px) {
+    /* La disposition reste flexible, mais on centre certains éléments */
     .header-content {
-        flex-direction: row; /* Disposition horizontale */
-        justify-content: space-between; /* Espacement optimal */
+        flex-direction: row; /* Horizontal */
+        justify-content: space-between; /* Espacement */
         align-items: center; /* Centrage vertical */
-        flex-wrap: nowrap; /* Empêche les retours à la ligne */
+        flex-wrap: nowrap;
     }
 
     .site-branding {
         text-align: left;
-        flex-shrink: 0; /* Ne pas réduire la taille */
+        flex-shrink: 0;
     }
     header h1 {
-        font-size: 2.8em; /* Ajustement pour s'intégrer horizontalement */
+        font-size: 2.8em;
         margin-bottom: 0.2rem;
     }
     header p {
@@ -446,59 +450,55 @@ footer {
         margin: 0;
     }
 
-    /* Cacher le bouton hamburger sur PC */
+    /* Le hamburger reste visible et positionné. */
     .hamburger-menu {
-        display: none;
+        position: static; /* Retire le positionnement absolu pour le laisser dans le flux flexbox */
+        order: 2; /* Positionne le hamburger avant la barre de recherche */
+        margin-left: auto; /* Pousse le hamburger vers la droite si l'espace le permet */
     }
 
-    /* Afficher la navigation normalement sur PC */
-    .main-nav {
-        display: block; /* S'assure qu'elle est visible */
-        position: static; /* Retire le positionnement fixe du mobile */
-        width: auto; /* Retire la largeur fixe du mobile */
-        height: auto; /* Retire la hauteur fixe du mobile */
-        background-color: transparent; /* Retire le fond du menu mobile */
-        box-shadow: none; /* Retire l'ombre du menu mobile */
-        transition: none; /* Retire les transitions de position */
-        padding-top: 0;
-        overflow-y: visible;
-        border-right: none;
-        flex-grow: 1; /* Permet à la nav de prendre l'espace restant */
-        text-align: right; /* Aligne les liens de nav à droite */
-    }
+    /* Le main-nav reste le menu latéral, même sur PC. */
+    /* Pas de changements spécifiques ici, car il est déjà défini comme fixe et caché par défaut. */
     .main-nav ul {
-        flex-direction: row; /* Revert à l'horizontal */
-        justify-content: flex-end; /* Aligne les liens à droite */
-    }
-    .main-nav ul li {
-        margin: 0 10px; /* Espacement entre les liens sur grand écran */
+        /* Conserve la direction en colonne pour le menu latéral */
+        flex-direction: column;
+        align-items: flex-start;
     }
     .main-nav ul li a {
-        color: #fff; /* Assure la couleur blanche sur grand écran */
-        background-color: rgba(255, 255, 255, 0.1); /* Conserve le fond subtil */
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        /* Conserve le style pour les liens du menu latéral */
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
     }
 
     .search-container {
-        max-width: 400px; /* Taille de recherche sur grand écran */
-        margin-left: 20px; /* Espacement avec la nav */
-        flex-shrink: 0; /* Ne pas réduire la taille */
-        order: unset; /* Retire l'ordre de mobile */
+        max-width: 400px;
+        margin-left: 20px;
+        flex-shrink: 0;
+        order: 3; /* Positionne la barre de recherche après le hamburger */
     }
 
-    /* L'overlay n'est pas nécessaire sur grand écran */
     .overlay {
-        display: none !important; /* Force la disparition de l'overlay */
+        display: none !important; /* L'overlay est toujours géré par JS mais cachée par défaut */
     }
 }
 
 /* Styles pour les écrans de taille tablette/mobile (max-width 992px) */
 @media (max-width: 992px) {
     header {
-        padding: 1.5rem 0; /* Moins de padding sur mobile */
+        padding: 1.5rem 0;
     }
-    /* .header-content est déjà en 'column' par défaut */
-    /* .site-branding est déjà ordonné '1' par défaut */
+    .header-content {
+        flex-direction: column; /* Retourne en colonne */
+        align-items: center;
+        gap: 20px;
+    }
+    .site-branding {
+        width: 100%;
+        order: 1;
+        margin-bottom: 1.5rem;
+        text-align: center; /* Centrer le branding sur mobile */
+    }
     header h1 {
         font-size: 2.5em;
     }
@@ -507,44 +507,22 @@ footer {
         margin: 0;
     }
 
-    /* Le bouton hamburger apparaît sur mobile */
     .hamburger-menu {
-        display: flex; /* Affiché sur mobile */
-        position: absolute; /* Positionnement absolu par rapport au header */
+        position: absolute; /* Revert au positionnement absolu pour mobile */
         top: 25px;
         right: 20px;
-        order: 2; /* Ordre dans la flexbox du header-content */
+        order: unset; /* Retire l'ordre, car la position absolue le gère */
+        margin-left: 0; /* Retire la marge auto du PC */
     }
 
-    /* .main-nav est déjà le menu latéral par défaut */
-    /* .main-nav.active est déjà géré */
-    /* .main-nav ul est déjà en 'column' par défaut */
-    /* .main-nav ul li a est déjà stylisé pour mobile par défaut */
+    /* La navigation reste latérale. */
+    /* .main-nav, .main-nav ul, .main-nav ul li, .main-nav ul li a sont déjà par défaut pour ce comportement */
 
     .search-container {
-        order: 3; /* Positionnement de la recherche après le branding et le menu hamburger sur mobile */
-        width: calc(100% - 40px); /* Ajustement de la largeur pour le padding du container */
-        max-width: none; /* Pas de max-width sur mobile */
-        margin: 0 auto; /* Centrage */
-    }
-
-    /* .overlay est déjà géré par défaut/JS */
-
-    /* Styles pour le contenu principal sur mobile */
-    .book-cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 15px;
-    }
-    .book-card img {
-        height: 180px;
-    }
-    .book-card h3 {
-        font-size: 1.1em;
-        min-height: 2.6em;
-    }
-    .download-btn, .btn-primary {
-        font-size: 0.9em;
-        padding: 10px 15px;
+        order: 3; /* Garde la recherche en bas pour mobile */
+        width: calc(100% - 40px);
+        max-width: none;
+        margin: 0 auto;
     }
 }
 
@@ -593,7 +571,7 @@ footer {
         padding-bottom: 10px;
     }
     .book-cards-container {
-        grid-template-columns: 1fr; /* Une seule colonne sur très petits écrans */
+        grid-template-columns: 1fr;
     }
     .book-card img {
         height: 200px;
