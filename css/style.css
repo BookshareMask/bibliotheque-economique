@@ -60,7 +60,7 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* --- Styles du Header --- */
+/* --- Styles du Header (Mobile-First par défaut) --- */
 header {
     background: var(--header-gradient);
     color: #fff;
@@ -78,10 +78,10 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Conteneur du contenu de l'en-tête (gestion du layout) */
+/* Conteneur du contenu de l'en-tête - Flexbox par défaut en colonne (mobile) */
 .header-content {
     display: flex;
-    flex-direction: column; /* Par défaut en colonne (mobile-first) */
+    flex-direction: column;
     align-items: center;
     gap: 20px;
 }
@@ -108,7 +108,7 @@ header p {
 
 /* --- Menu Hamburger (Mobile) --- */
 .hamburger-menu {
-    display: none; /* Caché par défaut sur PC */
+    display: none; /* Sera affiché via media query pour mobile */
     width: 40px;
     height: 30px;
     background: none;
@@ -117,7 +117,7 @@ header p {
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
-    z-index: 200; /* Assure qu'il est au-dessus du menu */
+    z-index: 200;
 }
 
 .hamburger-menu .bar {
@@ -134,54 +134,58 @@ header p {
 .hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
 .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-13px) rotate(-45deg); }
 
-/* --- Navigation Principale (main-nav) --- */
+/* --- Navigation Principale (main-nav) - Styles par défaut (mobile-first) --- */
 .main-nav {
-    display: block; /* Visible par défaut pour PC */
-    width: auto;
-    height: auto;
-    position: static;
-    background-color: transparent; /* Pas de fond sur PC */
-    box-shadow: none;
-    transition: none;
-    padding-top: 0;
-    overflow-y: visible;
-    border-right: none;
-    flex-grow: 1;
-    text-align: right;
+    /* Par défaut, c'est le style mobile, car mobile-first */
+    position: fixed;
+    top: 0;
+    left: -280px; /* Caché hors de l'écran */
+    width: 280px;
+    height: 100%;
+    background-color: var(--menu-bg-color); /* Fond du menu latéral */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    transition: left 0.4s ease-in-out;
+    z-index: 150;
+    padding-top: 80px;
+    overflow-y: auto;
+    border-right: 5px solid var(--accent-color);
+}
+.main-nav.active {
+    left: 0; /* Menu visible */
 }
 
 .main-nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 0;
+    flex-direction: column; /* Liens verticaux pour le menu mobile */
+    align-items: flex-start; /* Alignement à gauche */
+    padding: 20px;
+    gap: 10px; /* Espacement entre les liens */
 }
 
 .main-nav ul li {
-    margin: 0 18px; /* Espacement par défaut sur PC */
+    width: 100%;
 }
 
 .main-nav ul li a {
-    color: #fff; /* Couleur des liens sur PC */
+    color: #fff; /* Couleur des liens du menu mobile */
     font-weight: 600;
-    padding: 0.8rem 1.6rem;
-    border-radius: 30px;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 1.05em;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(3px);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent pour les liens */
+    border: none; /* Pas de bordure pour les liens mobiles */
 }
 
 .main-nav ul li a:hover, .main-nav ul li a.active {
     background-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    color: #fff;
+    transform: none; /* Pas de translation sur mobile */
+    box-shadow: none;
+    color: #fff; /* Assurer que la couleur reste blanche au survol */
 }
 
 /* --- Barre de recherche --- */
@@ -189,6 +193,7 @@ header p {
     position: relative;
     max-width: 600px;
     width: 100%;
+    order: 3; /* Sur mobile, la recherche est en bas */
 }
 
 #searchInput {
@@ -222,6 +227,21 @@ header p {
     color: var(--primary-color);
     font-size: 1.3em;
     opacity: 0.7;
+}
+
+/* Overlay pour cacher le reste de la page quand le menu est ouvert (mobile uniquement) */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 120;
+}
+.overlay.active {
+    display: block;
 }
 
 /* --- Contenu Principal --- */
@@ -463,6 +483,7 @@ footer {
         max-width: 400px; /* Taille de recherche sur grand écran */
         margin-left: 20px; /* Espacement avec la nav */
         flex-shrink: 0; /* Ne pas réduire la taille */
+        order: unset; /* Retire l'ordre de mobile */
     }
 
     /* L'overlay n'est pas nécessaire sur grand écran */
@@ -477,9 +498,10 @@ footer {
         padding: 1.5rem 0; /* Moins de padding sur mobile */
     }
     .header-content {
-        flex-direction: column;
+        /* Pas besoin de redéfinir, c'est la version par défaut/mobile-first */
+        /* flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 20px; */
     }
     .site-branding {
         width: 100%;
@@ -497,76 +519,32 @@ footer {
     /* Le bouton hamburger apparaît sur mobile */
     .hamburger-menu {
         display: flex; /* Affiché sur mobile */
-        position: absolute;
+        position: absolute; /* Positionnement absolu par rapport au header */
         top: 25px;
         right: 20px;
-        order: 2;
+        order: 2; /* Ordre dans la flexbox du header-content */
     }
 
-    /* La navigation est cachée par défaut sur mobile, s'affiche en latéral */
-    .main-nav {
-        position: fixed;
-        top: 0;
-        left: -280px; /* Hors de l'écran */
-        width: 280px;
-        height: 100%;
-        background-color: var(--menu-bg-color); /* Utilise la variable pour la couleur du fond du menu mobile */
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-        transition: left 0.4s ease-in-out;
-        z-index: 150;
-        padding-top: 80px;
-        overflow-y: auto;
-        border-right: 5px solid var(--accent-color);
-    }
-    /* Quand le menu est actif */
-    .main-nav.active {
-        left: 0;
-    }
+    /* Le main-nav est défini par défaut comme le menu latéral (mobile-first) */
+    /* .main-nav { ... } // Définis en dehors de la media query pour être mobile-first */
+    /* .main-nav.active { ... } // Définis en dehors de la media query */
 
-    .main-nav ul {
-        flex-direction: column; /* Les liens s'affichent verticalement */
-        align-items: flex-start; /* Alignement à gauche */
-        padding: 20px;
-    }
-    .main-nav ul li {
-        width: 100%;
-        margin: 10px 0;
-    }
-    .main-nav ul li a {
-        padding: 12px 15px;
-        border-radius: 8px;
-        background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent pour les liens du menu mobile */
-        justify-content: flex-start;
-        border: none;
-        color: #fff; /* Couleur des liens sur mobile */
-    }
-    .main-nav ul li a:hover, .main-nav ul li a.active {
-        background-color: rgba(255, 255, 255, 0.25);
-        transform: none; /* Pas de transformation de levitation dans le menu */
-        box-shadow: none;
-    }
+    /* .main-nav ul { ... } // Définis en dehors de la media query */
+    /* .main-nav ul li { ... } // Définis en dehors de la media query */
+
+    /* .main-nav ul li a { ... } // Définis en dehors de la media query pour les couleurs */
+    /* .main-nav ul li a:hover, .main-nav ul li a.active { ... } // Définis en dehors */
 
     .search-container {
-        order: 3;
-        width: calc(100% - 40px);
-        max-width: none;
-        margin: 0 auto;
+        order: 3; /* Positionnement de la recherche après le branding et le menu hamburger sur mobile */
+        width: calc(100% - 40px); /* Ajustement de la largeur pour le padding du container */
+        max-width: none; /* Pas de max-width sur mobile */
+        margin: 0 auto; /* Centrage */
     }
 
-    /* Overlay pour cacher le reste de la page quand le menu est ouvert */
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 120;
-    }
-    .overlay.active {
-        display: block;
-    }
+    /* L'overlay est géré par JS, mais on s'assure qu'il est bien display: block quand actif */
+    /* .overlay { ... } // Définis en dehors de la media query */
+    /* .overlay.active { ... } // Définis en dehors de la media query */
 
     /* Styles pour le contenu principal sur mobile */
     .book-cards-container {
