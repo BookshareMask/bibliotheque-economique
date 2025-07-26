@@ -1,0 +1,87 @@
+/* style.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+#searchBar {
+  padding: 0.75rem 1rem;
+  width: 90%;
+  max-width: 500px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin: auto;
+  display: block;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  flex: 1;
+}
+
+.category-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #2c3e50;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, background-color 0.2s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  background-color: #eaf0f6;
+}
+
+.category-card.contribute {
+  background-color: #16a085;
+  color: #fff;
+}
+
+.category-card.contribute:hover {
+  background-color: #149174;
+}
+
+footer {
+  background-color: #2c3e50;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-top: auto;
+}
