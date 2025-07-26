@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Bibliothèque Économique</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
+    h1 { color: #2c3e50; }
+    .search-box { margin-bottom: 20px; }
+    input[type="text"] { width: 100%; padding: 10px; }
+    .section { margin-top: 30px; }
+    .book { background: #fff; padding: 10px; margin: 10px 0; border-radius: 8px; }
+  </style>
 </head>
 <body>
-  <h1>Bienvenue dans la Bibliothèque Économique</h1>
-  <p>Voici une sélection de livres classés par secteur.</p>
 
-  <h2>Microéconomie</h2>
-  <ul>
-    <li><a href="https://drive.google.com/...">Livre Microéconomie 1</a> - Auteur</li>
-  </ul>
+  <h1>📚 Bibliothèque Économique</h1>
 
-  <h2>Macroéconomie</h2>
-  <ul>
-    <li><a href="https://drive.google.com/...">Livre Macroéconomie 1</a> - Auteur</li>
-  </ul>
+  <div class="search-box">
+    <input type="text" placeholder="🔍 Rechercher un livre..." onkeyup="searchBook(this.value)">
+  </div>
+
+  <div class="section" id="macro">
+    <h2>Macroeconomie</h2>
+    <div class="book">📖 Introduction à la macroéconomie — <a href="#">Télécharger</a></div>
+    <div class="book">📖 Politique budgétaire et monétaire — <a href="#">Télécharger</a></div>
+  </div>
+
+  <div class="section" id="micro">
+    <h2>Microéconomie</h2>
+    <div class="book">📖 Théorie du consommateur — <a href="#">Télécharger</a></div>
+    <div class="book">📖 Productivité et coût — <a href="#">Télécharger</a></div>
+  </div>
+
+  <div class="section">
+    <h2>Contribuer</h2>
+    <p>Vous avez un livre à partager ? Envoyez-le ici :</p>
+    <a href="mailto:tonemail@gmail.com">📤 Envoyer un livre par mail</a>
+  </div>
+
+  <script>
+    function searchBook(keyword) {
+      const books = document.querySelectorAll('.book');
+      books.forEach(book => {
+        book.style.display = book.textContent.toLowerCase().includes(keyword.toLowerCase()) ? 'block' : 'none';
+      });
+    }
+  </script>
+
 </body>
 </html>
