@@ -1,585 +1,446 @@
-/* Variables CSS pour faciliter les modifications */
 :root {
-    /* Couleurs */
-    --primary-color: #2c3e50; /* Bleu foncé - reste la base */
-    --accent-color: #3498db; /* Bleu vif pour les boutons/liens */
-    --secondary-accent-color: #2ecc71; /* Vert pour les accents positifs */
-    --text-color: #333;
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --secondary-accent-color: #2ecc71;
     --light-bg: #f4f4f4;
     --card-bg: #ffffff;
-    --border-color: #e0e0e0;
-    --menu-bg-color: #2c3e50; /* Fond du menu latéral, peut être légèrement différent du primary */
-
-    /* Ombres */
-    --shadow-light: rgba(0, 0, 0, 0.08);
-    --shadow-medium: rgba(0, 0, 0, 0.15);
-    --shadow-header: rgba(0, 0, 0, 0.3); /* Ombre plus prononcée pour l'en-tête */
-
-    /* Dégradés */
-    --header-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* Dégradé bleu-gris */
-    --search-gradient: linear-gradient(45deg, #e0f2f7, #f0f7f9); /* Dégradé très léger pour la barre de recherche */
-
-    /* Typographie */
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --text-color: #333;
+    --text-light: #777;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
-/* Styles généraux et réinitialisation */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-body);
-    line-height: 1.6;
-    background-color: var(--light-bg);
+    font-family: 'Open Sans', sans-serif;
     color: var(--text-color);
-    scroll-behavior: smooth;
-    overflow-x: hidden; /* Empêche le défilement horizontal dû au menu off-canvas */
+    background-color: var(--light-bg);
+    line-height: 1.6;
+    overflow-x: hidden;
 }
 
-body.no-scroll {
-    overflow: hidden; /* Empêche le défilement du body quand le menu est ouvert */
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }
 
 a {
     text-decoration: none;
     color: var(--accent-color);
-    transition: color 0.3s ease;
+    transition: var(--transition);
 }
 
 a:hover {
     color: var(--primary-color);
 }
 
-/* --- Styles du Header --- */
-header {
-    background: var(--header-gradient);
-    color: #fff;
-    padding: 2.5rem 0 2rem;
-    text-align: center;
-    box-shadow: 0 8px 20px var(--shadow-header);
-    position: relative;
-    overflow: hidden;
-    animation: fadeInHeader 1s ease-out;
-    z-index: 100;
-}
-
-@keyframes fadeInHeader {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Conteneur du contenu de l'en-tête */
-.header-content {
-    display: flex;
-    flex-direction: column; /* Par défaut en colonne */
-    align-items: center;
-    gap: 20px;
-}
-
-.site-branding {
-    text-align: center;
-}
-
-header h1 {
-    font-family: var(--font-heading);
-    margin-bottom: 0.8rem;
-    font-size: 3.5em;
-    letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-header p {
-    font-size: 1.2em;
-    opacity: 0.95;
-    max-width: 700px;
-    margin: 0.5rem auto;
-    font-weight: 300;
-}
-
-/* --- Menu Hamburger (Toujours visible et actif) --- */
-.hamburger-menu {
-    display: flex; /* Toujours affiché */
-    width: 40px;
-    height: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-    z-index: 200;
-    position: absolute; /* Positionné absolument dans le header */
-    top: 25px;
-    right: 20px;
-}
-
-.hamburger-menu .bar {
-    display: block;
-    width: 100%;
-    height: 4px;
-    background-color: #fff;
-    border-radius: 2px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Animation du hamburger en croix */
-.hamburger-menu.active .bar:nth-child(1) { transform: translateY(13px) rotate(45deg); }
-.hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
-.hamburger-menu.active .bar:nth-child(3) { transform: translateY(-13px) rotate(-45deg); }
-
-
-/* --- Navigation Principale (main-nav) - Toujours en mode latéral --- */
-.main-nav {
+/* Header Styles */
+.header {
+    background: linear-gradient(135deg, var(--primary-color), #1a252f);
+    color: white;
+    padding: 1rem 0;
     position: fixed;
-    top: 0;
-    left: -280px; /* Caché hors de l'écran par défaut */
-    width: 280px;
-    height: 100%;
-    background-color: var(--menu-bg-color);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-    transition: left 0.4s ease-in-out;
-    z-index: 150;
-    padding-top: 80px;
-    overflow-y: auto;
-    border-right: 5px solid var(--accent-color);
-}
-.main-nav.active {
-    left: 0; /* Visible quand actif */
-}
-
-.main-nav ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column; /* Liens toujours verticaux */
-    align-items: flex-start;
-    padding: 20px;
-    gap: 10px;
-}
-
-.main-nav ul li {
     width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
 }
 
-.main-nav ul li a {
-    color: #fff;
-    font-weight: 600;
-    padding: 12px 15px;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    font-size: 1.05em;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: none;
+    flex-wrap: wrap;
 }
 
-.main-nav ul li a:hover, .main-nav ul li a.active {
-    background-color: rgba(255, 255, 255, 0.25);
-    transform: none;
-    box-shadow: none;
-    color: #fff;
+.header-title {
+    flex: 1;
+    min-width: 250px;
 }
 
-/* --- Barre de recherche --- */
+.header-title h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.header-title p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Search Bar */
 .search-container {
     position: relative;
-    max-width: 600px;
-    width: 100%;
-    order: 3; /* Positionnement en bas dans la colonne du header-content */
+    margin: 1rem 0;
+    min-width: 250px;
 }
 
 #searchInput {
     width: 100%;
-    padding: 15px 25px 15px 50px;
+    padding: 0.6rem 1rem;
+    padding-right: 2.5rem;
+    border-radius: 30px;
     border: none;
-    border-radius: 35px;
-    font-size: 1.1em;
-    outline: none;
-    background: var(--search-gradient);
-    color: var(--text-color);
-    box-shadow: 0 3px 10px var(--shadow-light);
-    transition: all 0.3s ease;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow);
 }
 
-#searchInput::placeholder {
-    color: #888;
-    opacity: 0.8;
-}
-
-#searchInput:focus {
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-    transform: translateY(-2px);
-}
-
-.search-icon {
+#searchButton {
     position: absolute;
-    left: 20px;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: transparent;
+    border: none;
+    padding: 0 1rem;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.hamburger-box {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+}
+
+.hamburger-inner {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--primary-color);
-    font-size: 1.3em;
-    opacity: 0.7;
+    transition: var(--transition);
 }
 
-/* Overlay pour cacher le reste de la page quand le menu est ouvert */
+.hamburger-inner::before,
+.hamburger-inner::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    transition: var(--transition);
+}
+
+.hamburger-inner::before {
+    top: -8px;
+}
+
+.hamburger-inner::after {
+    top: 8px;
+}
+
+/* Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: var(--transition);
+    overflow-y: auto;
+}
+
+.main-nav.active {
+    left: 0;
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 1.5rem;
+    padding-top: 5rem;
+}
+
+.main-nav li {
+    margin-bottom: 1rem;
+}
+
+.main-nav a {
+    display: block;
+    padding: 0.6rem 1rem;
+    color: var(--text-color);
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.main-nav a:hover {
+    background: var(--light-bg);
+    color: var(--accent-color);
+}
+
+.main-nav a.active {
+    background: var(--accent-color);
+    color: white;
+}
+
+.main-nav i {
+    margin-right: 0.8rem;
+    width: 20px;
+    text-align: center;
+}
+
+.nav-footer {
+    padding: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    display: inline-block;
+    margin-right: 0.8rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Overlay */
 .overlay {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 120;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
 }
+
 .overlay.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
-/* --- Contenu Principal --- */
-main {
-    padding: 40px 0;
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 6rem auto 2rem;
+    padding: 0 1.5rem;
 }
 
-section {
-    background-color: var(--card-bg);
-    margin-bottom: 30px;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px var(--shadow-light);
+/* Book Sections */
+.featured-section, .book-group {
+    margin-bottom: 3rem;
 }
 
-h2 {
-    font-family: var(--font-heading);
-    font-size: 2em;
-    color: var(--primary-color);
-    margin-bottom: 25px;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 15px;
+.featured-section h2, .book-group h2 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
-.featured-icon, .contribution-icon, .group-icon {
+.featured-section h2 i, .book-group h2 i {
+    margin-right: 0.8rem;
     color: var(--accent-color);
-    font-size: 1.1em;
 }
 
-.book-cards-container {
+/* Books Grid */
+.books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
 }
 
+/* Book Card */
 .book-card {
-    background-color: var(--light-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 8px var(--shadow-light);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .book-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px var(--shadow-medium);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .book-card img {
-    max-width: 100%;
-    height: 220px;
-    object-fit: contain;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px var(--shadow-light);
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.book-card-content {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .book-card h3 {
-    font-family: var(--font-heading);
-    font-size: 1.3em;
-    color: var(--primary-color);
-    margin-bottom: 8px;
-    min-height: 2.8em;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
 }
 
 .book-author, .book-year {
-    font-size: 0.95em;
-    color: #666;
-    margin-bottom: 5px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
 }
 
 .download-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background-color: var(--accent-color);
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 25px;
-    margin-top: 15px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%;
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    text-align: center;
+    transition: var(--transition);
 }
 
 .download-btn:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
+    background: var(--primary-color);
+    color: white;
 }
 
-#contribution {
+.download-btn i {
+    margin-right: 0.5rem;
+}
+
+/* No Results Message */
+#noResults {
+    grid-column: 1 / -1;
     text-align: center;
-    padding: 40px;
-    background-color: #e8f5e9;
-    border: 1px dashed #c8e6c9;
-    border-radius: 10px;
+    padding: 2rem;
+    color: var(--text-light);
+    display: none;
 }
 
-#contribution p {
-    font-size: 1.15em;
-    margin-bottom: 25px;
-    color: #4CAF50;
+/* Contribute Section */
+.contribute-section {
+    background: var(--primary-color);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.contribute-section h2 {
+    color: white;
+    border-bottom: none;
+}
+
+.contribute-section h2 i {
+    color: var(--secondary-accent-color);
+}
+
+.contribute-section p {
+    margin: 1rem 0;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.btn-primary {
-    background-color: var(--secondary-accent-color);
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 25px;
+.contribute-btn {
+    background: var(--secondary-accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1rem;
 }
 
-.btn-primary:hover {
-    background-color: #28a065;
+.contribute-btn:hover {
+    background: #27ae60;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.message-info {
+/* Footer */
+.footer {
+    background: var(--primary-color);
+    color: white;
     text-align: center;
-    padding: 20px;
-    background-color: #e1f5fe;
-    color: #0288d1;
-    border: 1px solid #b3e5fc;
-    border-radius: 8px;
-    margin-top: 30px;
-    font-size: 1.1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    padding: 1.5rem;
+    margin-top: 3rem;
 }
 
-footer {
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 2rem 0;
-    text-align: center;
-    margin-top: 50px;
-    box-shadow: 0 -4px 8px var(--shadow-medium);
+.footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
 }
 
-.social-links {
-    margin-top: 15px;
-}
-
-.social-links a {
-    color: #fff;
-    font-size: 1.5em;
-    margin: 0 10px;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--accent-color);
-    transform: scale(1.1);
-}
-
-/* --- Media Queries pour la Responsivité --- */
-
-/* Styles pour les écrans larges (PC : min-width 993px et plus) */
-@media (min-width: 993px) {
-    /* La disposition reste flexible, mais on centre certains éléments */
+/* Responsive Styles */
+@media (max-width: 768px) {
     .header-content {
-        flex-direction: row; /* Horizontal */
-        justify-content: space-between; /* Espacement */
-        align-items: center; /* Centrage vertical */
-        flex-wrap: nowrap;
-    }
-
-    .site-branding {
-        text-align: left;
-        flex-shrink: 0;
-    }
-    header h1 {
-        font-size: 2.8em;
-        margin-bottom: 0.2rem;
-    }
-    header p {
-        font-size: 1em;
-        margin: 0;
-    }
-
-    /* Le hamburger reste visible et positionné. */
-    .hamburger-menu {
-        position: static; /* Retire le positionnement absolu pour le laisser dans le flux flexbox */
-        order: 2; /* Positionne le hamburger avant la barre de recherche */
-        margin-left: auto; /* Pousse le hamburger vers la droite si l'espace le permet */
-    }
-
-    /* Le main-nav reste le menu latéral, même sur PC. */
-    /* Pas de changements spécifiques ici, car il est déjà défini comme fixe et caché par défaut. */
-    .main-nav ul {
-        /* Conserve la direction en colonne pour le menu latéral */
         flex-direction: column;
-        align-items: flex-start;
+        text-align: center;
     }
-    .main-nav ul li a {
-        /* Conserve le style pour les liens du menu latéral */
-        background-color: rgba(255, 255, 255, 0.1);
-        border: none;
-        color: #fff;
-    }
-
-    .search-container {
-        max-width: 400px;
-        margin-left: 20px;
-        flex-shrink: 0;
-        order: 3; /* Positionne la barre de recherche après le hamburger */
-    }
-
-    .overlay {
-        display: none !important; /* L'overlay est toujours géré par JS mais cachée par défaut */
-    }
-}
-
-/* Styles pour les écrans de taille tablette/mobile (max-width 992px) */
-@media (max-width: 992px) {
-    header {
-        padding: 1.5rem 0;
-    }
-    .header-content {
-        flex-direction: column; /* Retourne en colonne */
-        align-items: center;
-        gap: 20px;
-    }
-    .site-branding {
-        width: 100%;
-        order: 1;
-        margin-bottom: 1.5rem;
-        text-align: center; /* Centrer le branding sur mobile */
-    }
-    header h1 {
-        font-size: 2.5em;
-    }
-    header p {
-        font-size: 1em;
-        margin: 0;
-    }
-
-    .hamburger-menu {
-        position: absolute; /* Revert au positionnement absolu pour mobile */
-        top: 25px;
-        right: 20px;
-        order: unset; /* Retire l'ordre, car la position absolue le gère */
-        margin-left: 0; /* Retire la marge auto du PC */
-    }
-
-    /* La navigation reste latérale. */
-    /* .main-nav, .main-nav ul, .main-nav ul li, .main-nav ul li a sont déjà par défaut pour ce comportement */
-
-    .search-container {
-        order: 3; /* Garde la recherche en bas pour mobile */
-        width: calc(100% - 40px);
-        max-width: none;
-        margin: 0 auto;
-    }
-}
-
-/* Ajustements pour les très petits écrans */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 2em;
-    }
-    header p {
-        font-size: 0.9em;
-    }
-    .site-branding {
+    
+    .header-title {
         margin-bottom: 1rem;
     }
-    .hamburger-menu {
-        top: 20px;
-        right: 15px;
-        width: 35px;
-        height: 25px;
+    
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
     }
-    .hamburger-menu .bar {
-        height: 3px;
+    
+    .main-content {
+        margin-top: 8rem;
     }
-    .hamburger-menu.active .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
-    .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
-    .main-nav {
-        width: 250px;
+    
+    .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
-    .main-nav ul {
-        padding: 15px;
-    }
-    .main-nav ul li a {
-        font-size: 0.95em;
-        padding: 10px 12px;
-    }
-    #searchInput {
-        padding: 12px 18px 12px 40px;
-        font-size: 0.95em;
-    }
-    .search-icon {
-        left: 15px;
-        font-size: 1.1em;
-    }
-    h2 {
-        font-size: 1.5em;
-        padding-bottom: 10px;
-    }
-    .book-cards-container {
+}
+
+@media (max-width: 480px) {
+    .books-grid {
         grid-template-columns: 1fr;
     }
-    .book-card img {
-        height: 200px;
+    
+    .header-title h1 {
+        font-size: 1.5rem;
     }
-    #contribution {
-        padding: 25px 15px;
-    }
-    #contribution p {
-        font-size: 1em;
+    
+    .header-title p {
+        font-size: 0.8rem;
     }
 }
