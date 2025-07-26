@@ -11,6 +11,7 @@
   <header>
     <h1>Microéconomie</h1>
     <p>Livres disponibles dans le secteur de la microéconomie</p>
+    <input type="text" id="searchInput" placeholder="Rechercher un livre...">
     <a href="index.html" style="color:white; text-decoration:underline;">← Retour à l'accueil</a>
   </header>
 
@@ -34,5 +35,17 @@
   <footer>
     <p>&copy; 2025 Bibliothèque Économique</p>
   </footer>
+  <script>
+  const searchInput = document.getElementById('searchInput');
+  const books = document.querySelectorAll('.category-card');
+
+  searchInput.addEventListener('keyup', function () {
+    const term = this.value.toLowerCase();
+    books.forEach(book => {
+      const title = book.innerText.toLowerCase();
+      book.style.display = title.includes(term) ? 'block' : 'none';
+    });
+  });
+</script>
 </body>
 </html>
