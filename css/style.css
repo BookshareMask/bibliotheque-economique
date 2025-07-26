@@ -1,16 +1,24 @@
 /* Variables CSS pour faciliter les modifications */
 :root {
-    --primary-color: #2c3e50; /* Bleu foncé */
-    --secondary-color: #34495e; /* Bleu-gris */
+    /* Couleurs */
+    --primary-color: #2c3e50; /* Bleu foncé - reste la base */
     --accent-color: #3498db; /* Bleu vif pour les boutons/liens */
-    --success-color: #27ae60; /* Vert pour les actions positives */
+    --secondary-accent-color: #2ecc71; /* Vert pour les accents positifs */
     --text-color: #333;
     --light-bg: #f4f4f4;
     --card-bg: #ffffff;
     --border-color: #e0e0e0;
+
+    /* Ombres */
     --shadow-light: rgba(0, 0, 0, 0.08);
     --shadow-medium: rgba(0, 0, 0, 0.15);
+    --shadow-header: rgba(0, 0, 0, 0.3); /* Ombre plus prononcée pour l'en-tête */
 
+    /* Dégradés */
+    --header-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* Dégradé bleu-gris */
+    --search-gradient: linear-gradient(45deg, #e0f2f7, #f0f7f9); /* Dégradé très léger pour la barre de recherche */
+
+    /* Typographie */
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Open Sans', sans-serif;
 }
@@ -27,7 +35,7 @@ body {
     line-height: 1.6;
     background-color: var(--light-bg);
     color: var(--text-color);
-    scroll-behavior: smooth; /* Défilement doux */
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -46,96 +54,117 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* Header */
+/* --- Header Amélioré --- */
 header {
-    background-color: var(--primary-color);
+    background: var(--header-gradient); /* Utilisation du dégradé */
     color: #fff;
-    padding: 1.5rem 0;
+    padding: 2.5rem 0 2rem; /* Plus de padding pour un look aéré */
     text-align: center;
-    box-shadow: 0 4px 8px var(--shadow-medium);
+    box-shadow: 0 8px 20px var(--shadow-header); /* Ombre plus profonde */
+    position: relative; /* Nécessaire pour les pseudo-éléments si on en ajoutait */
+    overflow: hidden; /* Assure que tout contenu interne reste dans l'en-tête */
+    animation: fadeInHeader 1s ease-out; /* Petite animation d'apparition */
+}
+
+@keyframes fadeInHeader {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 header h1 {
     font-family: var(--font-heading);
-    margin-bottom: 0.5rem;
-    font-size: 2.8em;
-    letter-spacing: 0.5px;
+    margin-bottom: 0.8rem;
+    font-size: 3.5em; /* Taille légèrement augmentée */
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Ombre portée sur le titre */
 }
 
 header p {
-    font-size: 1.1em;
-    opacity: 0.9;
-    max-width: 800px;
-    margin: 0.5rem auto 1.5rem auto;
+    font-size: 1.2em; /* Taille de description augmentée */
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0.5rem auto 2rem auto; /* Plus d'espace sous la description */
+    font-weight: 300; /* Plus léger */
 }
 
-/* Navigation */
+/* --- Navigation Améliorée --- */
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem; /* Plus d'espace sous la nav */
 }
 
 nav ul li {
-    margin: 0 15px 10px 15px; /* Ajout d'une marge basse pour le responsive */
+    margin: 0 18px 15px 18px; /* Plus d'espacement entre les liens */
 }
 
 nav ul li a {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.9); /* Texte légèrement transparent */
     font-weight: 600;
-    padding: 0.7rem 1.4rem;
-    border-radius: 25px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: flex; /* Pour aligner icône et texte */
+    padding: 0.8rem 1.6rem;
+    border-radius: 30px; /* Bordures plus arrondies */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    display: flex;
     align-items: center;
-    gap: 8px; /* Espacement entre icône et texte */
+    gap: 10px;
+    font-size: 1.05em; /* Légèrement plus grand */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure subtile */
+    backdrop-filter: blur(3px); /* Effet de flou derrière les liens */
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
 }
 
 nav ul li a:hover, nav ul li a.active {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.25); /* Plus opaque au survol */
+    transform: translateY(-4px); /* Effet de levitation plus prononcé */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+    color: #fff; /* Couleur texte blanche pure au survol */
 }
 
-/* Barre de recherche */
+/* --- Barre de recherche Améliorée --- */
 .search-container {
     position: relative;
-    max-width: 500px;
+    max-width: 600px; /* Barre de recherche un peu plus large */
     margin: 0 auto;
 }
 
 #searchInput {
     width: 100%;
-    padding: 12px 20px 12px 45px; /* Espace pour l'icône */
+    padding: 15px 25px 15px 50px; /* Plus de padding, espace icône */
     border: none;
-    border-radius: 30px;
-    font-size: 1em;
+    border-radius: 35px; /* Très arrondi */
+    font-size: 1.1em; /* Texte plus grand */
     outline: none;
-    background-color: rgba(255, 255, 255, 0.9);
+    background: var(--search-gradient); /* Dégradé pour le fond */
     color: var(--text-color);
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    box-shadow: 0 3px 10px var(--shadow-light); /* Ombre subtile */
+    transition: all 0.3s ease;
 }
 
 #searchInput::placeholder {
     color: #888;
+    opacity: 0.8; /* Légèrement plus transparent */
 }
 
 #searchInput:focus {
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); /* Ombre accentuée au focus */
+    transform: translateY(-2px); /* Légère levitation */
 }
 
 .search-icon {
     position: absolute;
-    left: 15px;
+    left: 20px; /* Plus de padding à gauche pour l'icône */
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
-    font-size: 1.1em;
+    color: var(--primary-color); /* Couleur de l'icône plus visible */
+    font-size: 1.3em; /* Icône plus grande */
+    opacity: 0.7;
 }
 
-/* Main Content */
+
+/* --- Le reste du CSS (non modifié dans cet exemple, mais à conserver) --- */
+
 main {
     padding: 40px 0;
 }
@@ -160,16 +189,14 @@ h2 {
     gap: 10px;
 }
 
-/* Icônes de section */
 .featured-icon, .contribution-icon, .group-icon {
     color: var(--accent-color);
     font-size: 1.1em;
 }
 
-/* Cartes de livres */
 .book-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Légèrement réduit la taille min */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 25px;
     margin-top: 20px;
 }
@@ -184,7 +211,7 @@ h2 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Pour pousser le bouton en bas */
+    justify-content: space-between;
 }
 
 .book-card:hover {
@@ -194,8 +221,8 @@ h2 {
 
 .book-card img {
     max-width: 100%;
-    height: 220px; /* Hauteur fixe pour toutes les images */
-    object-fit: contain; /* Assure que l'image tient sans être coupée */
+    height: 220px;
+    object-fit: contain;
     border-radius: 8px;
     margin-bottom: 15px;
     box-shadow: 0 2px 5px var(--shadow-light);
@@ -204,9 +231,9 @@ h2 {
 .book-card h3 {
     font-family: var(--font-heading);
     font-size: 1.3em;
-    color: var(--secondary-color);
+    color: var(--primary-color); /* Changé à primary pour plus de cohérence */
     margin-bottom: 8px;
-    min-height: 2.8em; /* Pour une hauteur uniforme même avec 1 ou 2 lignes de titre */
+    min-height: 2.8em;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -221,7 +248,7 @@ h2 {
 }
 
 .download-btn {
-    display: inline-flex; /* Pour aligner icône et texte */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -233,33 +260,33 @@ h2 {
     margin-top: 15px;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%; /* Bouton pleine largeur */
+    width: 100%;
 }
 
 .download-btn:hover {
-    background-color: #2980b9; /* Teinte plus foncée du bleu */
+    background-color: #2980b9;
     transform: translateY(-2px);
 }
 
-/* Section Contribution */
 #contribution {
     text-align: center;
     padding: 40px;
-    background-color: #e8f5e9; /* Une couleur plus douce pour cette section */
-    border: 1px dashed #c8e6c9; /* Bordure discrète */
+    background-color: #e8f5e9;
+    border: 1px dashed #c8e6c9;
+    border-radius: 10px; /* Bordure un peu plus arrondie */
 }
 
 #contribution p {
     font-size: 1.15em;
     margin-bottom: 25px;
-    color: #4CAF50; /* Couleur associée au succès/positif */
+    color: #4CAF50;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .btn-primary {
-    background-color: var(--success-color);
+    background-color: var(--secondary-accent-color); /* Utilise la nouvelle couleur secondaire pour le bouton */
     color: #fff;
     padding: 12px 25px;
     border-radius: 25px;
@@ -271,11 +298,10 @@ h2 {
 }
 
 .btn-primary:hover {
-    background-color: #229a53;
+    background-color: #28a065; /* Teinte plus foncée du vert */
     transform: translateY(-2px);
 }
 
-/* Messages d'information (ex: pas de résultats de recherche) */
 .message-info {
     text-align: center;
     padding: 20px;
@@ -291,7 +317,6 @@ h2 {
     gap: 10px;
 }
 
-/* Footer */
 footer {
     background-color: var(--primary-color);
     color: #fff;
@@ -317,16 +342,24 @@ footer {
     transform: scale(1.1);
 }
 
-/* Responsive Design */
+/* --- Responsive Design (Mis à jour pour le nouvel en-tête) --- */
 @media (max-width: 992px) {
+    header {
+        padding: 2rem 0 1.5rem;
+    }
     header h1 {
-        font-size: 2.4em;
+        font-size: 3em;
+    }
+    header p {
+        font-size: 1.1em;
+        margin-bottom: 1.5rem;
     }
     nav ul li {
-        margin: 0 10px 10px 10px;
+        margin: 0 12px 10px 12px;
     }
     nav ul li a {
-        padding: 0.6rem 1.2rem;
+        padding: 0.7rem 1.4rem;
+        font-size: 1em;
     }
     .book-cards-container {
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -338,15 +371,20 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 1.8rem 0 1.2rem;
+    }
     header h1 {
-        font-size: 2em;
+        font-size: 2.5em;
     }
     header p {
         font-size: 1em;
+        margin-bottom: 1.2rem;
     }
     nav ul {
         flex-direction: column;
         align-items: center;
+        margin-bottom: 1.5rem;
     }
     nav ul li {
         margin: 8px 0;
@@ -374,14 +412,26 @@ footer {
         font-size: 0.9em;
         padding: 10px 15px;
     }
+    #searchInput {
+        padding: 12px 20px 12px 45px;
+        font-size: 1em;
+    }
+    .search-icon {
+        font-size: 1.1em;
+        left: 18px;
+    }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.8em;
+        font-size: 2em;
     }
     header p {
         font-size: 0.9em;
+    }
+    nav ul li a {
+        font-size: 0.9em;
+        padding: 0.6rem 1rem;
     }
     #searchInput {
         padding: 10px 15px 10px 40px;
@@ -389,20 +439,17 @@ footer {
     }
     .search-icon {
         font-size: 1em;
-        left: 12px;
+        left: 15px;
     }
     h2 {
         font-size: 1.5em;
         padding-bottom: 10px;
     }
     .book-cards-container {
-        grid-template-columns: 1fr; /* Une seule colonne sur très petits écrans */
-    }
-    .book-card {
-        padding: 15px;
+        grid-template-columns: 1fr;
     }
     .book-card img {
-        height: 200px; /* Taille un peu plus grande pour la colonne unique */
+        height: 200px;
     }
     #contribution {
         padding: 25px 15px;
