@@ -3,97 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Bibliothèque Économique</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="css/style.css?v=202507261805"> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Bibliothèque Économique - Accueil</title>
+    <meta name="description" content="Votre bibliothèque numérique incontournable pour accéder facilement à une vaste collection de ressources économiques essentielles.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css?v=20230727">
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="site-branding">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
                 <h1>Bibliothèque Économique</h1>
-                <p>Votre ressource incontournable pour explorer les concepts et les recherches clés en économie, classée par secteurs.</p>
+                <p>Votre ressource centrale pour les livres et documents d'économie</p>
             </div>
-
-            <button class="hamburger-menu" aria-label="Ouvrir le menu de navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            
+            <!-- Mobile Menu Button -->
+            <button class="hamburger" aria-label="Menu" aria-expanded="false">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
             </button>
-
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html" aria-label="Retour à l'Accueil"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="microeconomie.html" aria-label="Explorer la Microéconomie">Microéconomie</a></li>
-                    <li><a href="macroeconomie.html" aria-label="Explorer la Macroéconomie">Macroéconomie</a></li>
-                    <li><a href="finance.html" aria-label="Explorer la Finance">Finance</a></li>
-                    <li><a href="developpement.html" aria-label="Explorer le Développement">Développement</a></li>
-                    <li><a href="autres.html" aria-label="Explorer les Autres Domaines">Autres</a></li>
-                </ul>
-            </nav>
-
+            
+            <!-- Search Bar -->
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Rechercher un livre par titre ou auteur..." aria-label="Barre de recherche de livres">
-                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher un livre, auteur..." aria-label="Rechercher un livre">
+                <button id="searchButton" aria-label="Lancer la recherche"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </header>
-
-    <main class="container" id="bookList">
-        <section class="book-group">
-            <h2><i class="fas fa-star featured-icon"></i> Livres en Vedette</h2>
-            <div class="book-cards-container">
-                <div class="book-card" data-title="Capital au XXIe siècle" data-author="Thomas Piketty" data-year="2013" data-category="Macroéconomie">
-                    <img src="images/piketty-capital.jpg" alt="Couverture de Le Capital au XXIe siècle" loading="lazy">
-                    <h3>Le Capital au XXIe siècle</h3>
-                    <p class="book-author">Thomas Piketty</p>
-                    <p class="book-year">2013</p>
-                    <a href="pdfs/piketty-capital.pdf" download class="download-btn" aria-label="Télécharger Le Capital au XXIe siècle"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-                <div class="book-card" data-title="Misbehaving: The Making of Behavioral Economics" data-author="Richard H. Thaler" data-year="2015" data-category="Microéconomie">
-                    <img src="images/thaler-misbehaving.jpg" alt="Couverture de Misbehaving" loading="lazy">
-                    <h3>Misbehaving: The Making of Behavioral Economics</h3>
-                    <p class="book-author">Richard H. Thaler</p>
-                    <p class="book-year">2015</p>
-                    <a href="pdfs/thaler-misbehaving.pdf" download class="download-btn" aria-label="Télécharger Misbehaving"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-                <div class="book-card" data-title="La Richesse des Nations" data-author="Adam Smith" data-year="1776" data-category="Histoire de la Pensée">
-                    <img src="images/smith-richesse-nations.jpg" alt="Couverture de La Richesse des Nations" loading="lazy">
-                    <h3>La Richesse des Nations</h3>
-                    <p class="book-author">Adam Smith</p>
-                    <p class="book-year">1776</p>
-                    <a href="pdfs/smith-richesse-nations.pdf" download class="download-btn" aria-label="Télécharger La Richesse des Nations"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-                <div class="book-card" data-title="Nudge: Improving Decisions About Health, Wealth, and Happiness" data-author="Richard H. Thaler & Cass R. Sunstein" data-year="2008" data-category="Économie Comportementale">
-                    <img src="images/thaler-sunstein-nudge.jpg" alt="Couverture de Nudge" loading="lazy">
-                    <h3>Nudge: Improving Decisions About Health, Wealth, and Happiness</h3>
-                    <p class="book-author">Richard H. Thaler & Cass R. Sunstein</p>
-                    <p class="book-year">2008</p>
-                    <a href="pdfs/thaler-sunstein-nudge.pdf" download class="download-btn" aria-label="Télécharger Nudge"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contribution" class="container">
-            <p><i class="fas fa-hand-holding-usd contribution-icon"></i> Vous souhaitez contribuer à enrichir notre bibliothèque ?</p>
-            <a href="#" class="btn-primary" aria-label="Proposer un livre"><i class="fas fa-plus-circle"></i> Proposer un livre</a>
-        </section>
-
-        <div id="noResults" class="message-info" style="display: none;">
-            <p><i class="fas fa-info-circle"></i> Aucun livre ne correspond à votre recherche.</p>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="overlay"></div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a href="microeconomie.html"><i class="fas fa-chart-line"></i> Microéconomie</a></li>
+            <li><a href="macroeconomie.html"><i class="fas fa-chart-bar"></i> Macroéconomie</a></li>
+            <li><a href="finance.html"><i class="fas fa-coins"></i> Finance</a></li>
+            <li><a href="developpement.html"><i class="fas fa-globe-africa"></i> Développement</a></li>
+            <li><a href="autres.html"><i class="fas fa-book"></i> Autres Domaines</a></li>
+        </ul>
+        
+        <div class="nav-footer">
+            <p>Bibliothèque Économique © 2023</p>
             <div class="social-links">
-                <a href="#" aria-label="Suivez-nous sur Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Suivez-nous sur LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Featured Books Section -->
+        <section class="featured-section">
+            <h2><i class="fas fa-star"></i> Livres en Vedette</h2>
+            <div class="books-grid">
+                <!-- Book Card 1 -->
+                <div class="book-card" data-title="Principes d'économie" data-author="Gregory Mankiw" data-category="Général">
+                    <img src="images/mankiw.jpg" alt="Couverture de Principes d'économie" loading="lazy">
+                    <h3>Principes d'économie</h3>
+                    <p class="book-author">Gregory Mankiw</p>
+                    <p class="book-year">2019</p>
+                    <a href="pdfs/mankiw.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                </div>
+                
+                <!-- Book Card 2 -->
+                <div class="book-card" data-title="Économie du développement" data-author="Philippe Hugon" data-category="Développement">
+                    <img src="images/hugon.jpg" alt="Couverture de Économie du développement" loading="lazy">
+                    <h3>Économie du développement</h3>
+                    <p class="book-author">Philippe Hugon</p>
+                    <p class="book-year">2015</p>
+                    <a href="pdfs/hugon.pdf" class="download-btn" download>
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                </div>
+                
+                <!-- Add more featured books as needed -->
+            </div>
+        </section>
+        
+        <!-- Call to Action -->
+        <section class="contribute-section">
+            <div class="contribute-content">
+                <h2><i class="fas fa-hand-holding-heart"></i> Contribuez à la bibliothèque</h2>
+                <p>Vous avez un livre ou une ressource à partager ? Aidez-nous à enrichir cette bibliothèque pour la communauté !</p>
+                <button class="contribute-btn">Proposer un livre</button>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Bibliothèque Économique © 2023 - Tous droits réservés</p>
+        <p>Ressources éducatives gratuites pour la communauté</p>
     </footer>
-
-    <script src="js/main.js?v=202507261805"></script> </body>
+    
+    <!-- JavaScript -->
+    <script src="js/main.js?v=20230727"></script>
+</body>
 </html>
