@@ -1,186 +1,413 @@
-/* Styles généraux */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+/* Variables CSS pour faciliter les modifications */
+:root {
+    --primary-color: #2c3e50; /* Bleu foncé */
+    --secondary-color: #34495e; /* Bleu-gris */
+    --accent-color: #3498db; /* Bleu vif pour les boutons/liens */
+    --success-color: #27ae60; /* Vert pour les actions positives */
+    --text-color: #333;
+    --light-bg: #f4f4f4;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
 }
 
+/* Styles généraux et réinitialisation */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    scroll-behavior: smooth; /* Défilement doux */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+/* Header */
 header {
-    background-color: #2c3e50;
+    background-color: var(--primary-color);
     color: #fff;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     text-align: center;
+    box-shadow: 0 4px 8px var(--shadow-medium);
 }
 
 header h1 {
-    margin: 0;
-    font-size: 2.5em;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+    font-size: 2.8em;
+    letter-spacing: 0.5px;
 }
 
 header p {
     font-size: 1.1em;
-    margin-top: 0.5rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0.5rem auto 1.5rem auto;
 }
 
+/* Navigation */
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 15px 10px 15px; /* Ajout d'une marge basse pour le responsive */
 }
 
 nav ul li a {
     color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
+    font-weight: 600;
+    padding: 0.7rem 1.4rem;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex; /* Pour aligner icône et texte */
+    align-items: center;
+    gap: 8px; /* Espacement entre icône et texte */
 }
 
 nav ul li a:hover, nav ul li a.active {
-    background-color: #34495e;
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 /* Barre de recherche */
 .search-container {
-    margin-top: 1rem;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 #searchInput {
-    padding: 10px 15px;
+    width: 100%;
+    padding: 12px 20px 12px 45px; /* Espace pour l'icône */
     border: none;
-    border-radius: 20px;
-    width: 80%;
-    max-width: 400px;
+    border-radius: 30px;
     font-size: 1em;
     outline: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--text-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
+#searchInput::placeholder {
+    color: #888;
+}
+
+#searchInput:focus {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.1em;
+}
+
+/* Main Content */
 main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding: 40px 0;
+}
+
+section {
+    background-color: var(--card-bg);
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Icônes de section */
+.featured-icon, .contribution-icon, .group-icon {
+    color: var(--accent-color);
+    font-size: 1.1em;
 }
 
 /* Cartes de livres */
 .book-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Légèrement réduit la taille min */
+    gap: 25px;
     margin-top: 20px;
 }
 
 .book-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pour pousser le bouton en bas */
 }
 
 .book-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px var(--shadow-medium);
 }
 
 .book-card img {
     max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    height: 220px; /* Hauteur fixe pour toutes les images */
+    object-fit: contain; /* Assure que l'image tient sans être coupée */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px var(--shadow-light);
 }
 
 .book-card h3 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    height: 3em; /* Pour une hauteur uniforme */
-    overflow: hidden; /* Cache le texte qui dépasse */
+    font-family: var(--font-heading);
+    font-size: 1.3em;
+    color: var(--secondary-color);
+    margin-bottom: 8px;
+    min-height: 2.8em; /* Pour une hauteur uniforme même avec 1 ou 2 lignes de titre */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-author, .book-year {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 5px;
 }
 
 .download-btn {
-    display: inline-block;
-    background-color: #3498db;
+    display: inline-flex; /* Pour aligner icône et texte */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--accent-color);
     color: #fff;
-    padding: 8px 15px;
+    padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 25px;
+    margin-top: 15px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Bouton pleine largeur */
 }
 
 .download-btn:hover {
-    background-color: #2980b9;
+    background-color: #2980b9; /* Teinte plus foncée du bleu */
+    transform: translateY(-2px);
 }
 
 /* Section Contribution */
 #contribution {
     text-align: center;
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #ecf0f1;
-    border-radius: 8px;
+    padding: 40px;
+    background-color: #e8f5e9; /* Une couleur plus douce pour cette section */
+    border: 1px dashed #c8e6c9; /* Bordure discrète */
 }
 
 #contribution p {
-    font-size: 1.1em;
-    margin-bottom: 15px;
+    font-size: 1.15em;
+    margin-bottom: 25px;
+    color: #4CAF50; /* Couleur associée au succès/positif */
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.btn {
-    display: inline-block;
-    background-color: #27ae60;
+.btn-primary {
+    background-color: var(--success-color);
     color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.btn:hover {
-    background-color: #229954;
+.btn-primary:hover {
+    background-color: #229a53;
+    transform: translateY(-2px);
 }
 
-footer {
+/* Messages d'information (ex: pas de résultats de recherche) */
+.message-info {
     text-align: center;
-    padding: 1.5rem 0;
-    background-color: #2c3e50;
-    color: #fff;
+    padding: 20px;
+    background-color: #e1f5fe;
+    color: #0288d1;
+    border: 1px solid #b3e5fc;
+    border-radius: 8px;
     margin-top: 30px;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -4px 8px var(--shadow-medium);
+}
+
+.social-links {
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
 }
 
 /* Responsive Design */
+@media (max-width: 992px) {
+    header h1 {
+        font-size: 2.4em;
+    }
+    nav ul li {
+        margin: 0 10px 10px 10px;
+    }
+    nav ul li a {
+        padding: 0.6rem 1.2rem;
+    }
+    .book-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+    .book-card img {
+        height: 200px;
+    }
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2em;
     }
-
+    header p {
+        font-size: 1em;
+    }
     nav ul {
         flex-direction: column;
+        align-items: center;
     }
-
     nav ul li {
-        margin: 5px 0;
+        margin: 8px 0;
     }
-
+    .container {
+        padding: 0 15px;
+    }
+    h2 {
+        font-size: 1.8em;
+        text-align: center;
+        justify-content: center;
+    }
     .book-cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+    .book-card img {
+        height: 180px;
+    }
+    .book-card h3 {
+        font-size: 1.1em;
+        min-height: 2.6em;
+    }
+    .download-btn, .btn-primary {
+        font-size: 0.9em;
+        padding: 10px 15px;
     }
 }
 
 @media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    header p {
+        font-size: 0.9em;
+    }
     #searchInput {
-        width: 90%;
+        padding: 10px 15px 10px 40px;
+        font-size: 0.9em;
+    }
+    .search-icon {
+        font-size: 1em;
+        left: 12px;
+    }
+    h2 {
+        font-size: 1.5em;
+        padding-bottom: 10px;
+    }
+    .book-cards-container {
+        grid-template-columns: 1fr; /* Une seule colonne sur très petits écrans */
+    }
+    .book-card {
+        padding: 15px;
+    }
+    .book-card img {
+        height: 200px; /* Taille un peu plus grande pour la colonne unique */
+    }
+    #contribution {
+        padding: 25px 15px;
+    }
+    #contribution p {
+        font-size: 1em;
     }
 }
