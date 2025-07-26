@@ -8,6 +8,7 @@
     --light-bg: #f4f4f4;
     --card-bg: #ffffff;
     --border-color: #e0e0e0;
+    --menu-bg-color: #2c3e50; /* Fond du menu latéral, peut être légèrement différent du primary */
 
     /* Ombres */
     --shadow-light: rgba(0, 0, 0, 0.08);
@@ -59,7 +60,7 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* --- Styles du Header (Appliqués par défaut, puis modifiés par media queries) --- */
+/* --- Styles du Header --- */
 header {
     background: var(--header-gradient);
     color: #fff;
@@ -77,10 +78,10 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Conteneur du contenu de l'en-tête (s'adapte au responsive) */
+/* Conteneur du contenu de l'en-tête (gestion du layout) */
 .header-content {
     display: flex;
-    flex-direction: column; /* Par défaut en colonne (mobile first) */
+    flex-direction: column; /* Par défaut en colonne (mobile-first) */
     align-items: center;
     gap: 20px;
 }
@@ -105,9 +106,9 @@ header p {
     font-weight: 300;
 }
 
-/* --- Menu Hamburger (caché par défaut sur PC, affiché sur mobile) --- */
+/* --- Menu Hamburger (Mobile) --- */
 .hamburger-menu {
-    display: none; /* Caché sur grand écran */
+    display: none; /* Caché par défaut sur PC */
     width: 40px;
     height: 30px;
     background: none;
@@ -116,14 +117,14 @@ header p {
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
-    z-index: 200;
+    z-index: 200; /* Assure qu'il est au-dessus du menu */
 }
 
 .hamburger-menu .bar {
     display: block;
     width: 100%;
     height: 4px;
-    background-color: #fff;
+    background-color: #fff; /* Les barres doivent être blanches */
     border-radius: 2px;
     transition: all 0.3s ease-in-out;
 }
@@ -134,6 +135,21 @@ header p {
 .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-13px) rotate(-45deg); }
 
 /* --- Navigation Principale (main-nav) --- */
+.main-nav {
+    display: block; /* Visible par défaut pour PC */
+    width: auto;
+    height: auto;
+    position: static;
+    background-color: transparent; /* Pas de fond sur PC */
+    box-shadow: none;
+    transition: none;
+    padding-top: 0;
+    overflow-y: visible;
+    border-right: none;
+    flex-grow: 1;
+    text-align: right;
+}
+
 .main-nav ul {
     list-style: none;
     display: flex;
@@ -143,11 +159,11 @@ header p {
 }
 
 .main-nav ul li {
-    margin: 0 18px;
+    margin: 0 18px; /* Espacement par défaut sur PC */
 }
 
 .main-nav ul li a {
-    color: #fff; /* Couleur blanche pure par défaut pour PC */
+    color: #fff; /* Couleur des liens sur PC */
     font-weight: 600;
     padding: 0.8rem 1.6rem;
     border-radius: 30px;
@@ -156,9 +172,9 @@ header p {
     align-items: center;
     gap: 10px;
     font-size: 1.05em;
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure subtile */
-    backdrop-filter: blur(3px); /* Effet de flou derrière les liens */
-    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .main-nav ul li a:hover, .main-nav ul li a.active {
@@ -388,7 +404,7 @@ footer {
 
 /* --- Media Queries pour la Responsivité --- */
 
-/* Sur les grands écrans (PC : min-width 993px et plus) */
+/* Styles pour les écrans larges (PC : min-width 993px et plus) */
 @media (min-width: 993px) {
     .header-content {
         flex-direction: row; /* Disposition horizontale */
@@ -455,7 +471,7 @@ footer {
     }
 }
 
-/* Sur les écrans de taille tablette/mobile (max-width 992px) */
+/* Styles pour les écrans de taille tablette/mobile (max-width 992px) */
 @media (max-width: 992px) {
     header {
         padding: 1.5rem 0; /* Moins de padding sur mobile */
@@ -494,7 +510,7 @@ footer {
         left: -280px; /* Hors de l'écran */
         width: 280px;
         height: 100%;
-        background-color: var(--secondary-color);
+        background-color: var(--menu-bg-color); /* Utilise la variable pour la couleur du fond du menu mobile */
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
         transition: left 0.4s ease-in-out;
         z-index: 150;
@@ -519,13 +535,14 @@ footer {
     .main-nav ul li a {
         padding: 12px 15px;
         border-radius: 8px;
-        background-color: transparent; /* Fond transparent pour les liens du menu mobile */
+        background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent pour les liens du menu mobile */
         justify-content: flex-start;
-        border: none; /* Pas de bordure pour les liens du menu mobile */
+        border: none;
+        color: #fff; /* Couleur des liens sur mobile */
     }
     .main-nav ul li a:hover, .main-nav ul li a.active {
-        background-color: rgba(255, 255, 255, 0.15);
-        transform: none;
+        background-color: rgba(255, 255, 255, 0.25);
+        transform: none; /* Pas de transformation de levitation dans le menu */
         box-shadow: none;
     }
 
