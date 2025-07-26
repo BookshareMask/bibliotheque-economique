@@ -2,50 +2,32 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bibliothèque Économique</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; }
-    h1 { color: #2c3e50; }
-    .search-box { margin-bottom: 20px; }
-    input[type="text"] { width: 100%; padding: 10px; }
-    .section { margin-top: 30px; }
-    .book { background: #fff; padding: 10px; margin: 10px 0; border-radius: 8px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <header>
+    <h1>Bibliothèque Économique</h1>
+    <p>Explorez, lisez et contribuez à notre collection de livres en économie classés par secteur.</p>
+    <input type="text" id="searchBar" placeholder="🔍 Rechercher un livre...">
+  </header>
 
-  <h1>📚 Bibliothèque Économique</h1>
+  <main>
+    <section class="categories">
+      <a href="microeconomie.html" class="category-card">Microéconomie</a>
+      <a href="macroeconomie.html" class="category-card">Macroéconomie</a>
+      <a href="finance.html" class="category-card">Finance</a>
+      <a href="developpement.html" class="category-card">Économie du développement</a>
+      <a href="contribute.html" class="category-card contribute">📤 Contribuer</a>
+    </section>
+  </main>
 
-  <div class="search-box">
-    <input type="text" placeholder="🔍 Rechercher un livre..." onkeyup="searchBook(this.value)">
-  </div>
-
-  <div class="section" id="macro">
-    <h2>Macroeconomie</h2>
-    <div class="book">📖 Introduction à la macroéconomie — <a href="#">Télécharger</a></div>
-    <div class="book">📖 Politique budgétaire et monétaire — <a href="#">Télécharger</a></div>
-  </div>
-
-  <div class="section" id="micro">
-    <h2>Microéconomie</h2>
-    <div class="book">📖 Théorie du consommateur — <a href="#">Télécharger</a></div>
-    <div class="book">📖 Productivité et coût — <a href="#">Télécharger</a></div>
-  </div>
-
-  <div class="section">
-    <h2>Contribuer</h2>
-    <p>Vous avez un livre à partager ? Envoyez-le ici :</p>
-    <a href="mailto:tonemail@gmail.com">📤 Envoyer un livre par mail</a>
-  </div>
-
-  <script>
-    function searchBook(keyword) {
-      const books = document.querySelectorAll('.book');
-      books.forEach(book => {
-        book.style.display = book.textContent.toLowerCase().includes(keyword.toLowerCase()) ? 'block' : 'none';
-      });
-    }
-  </script>
-
+  <footer>
+    <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
+  </footer>
 </body>
 </html>
