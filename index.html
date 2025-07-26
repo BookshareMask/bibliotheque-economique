@@ -1,80 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliothèque Économique - Accueil</title>
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <header>
-        <div class="container">
+<header>
+    <div class="container header-content">
+        <div class="site-branding">
             <h1>Bibliothèque Économique</h1>
             <p>Votre ressource incontournable pour explorer les concepts et les recherches clés en économie, classée par secteurs.</p>
-            <nav>
-                <ul>
-                    <li><a href="microeconomie.html" aria-label="Explorer la Microéconomie">Microéconomie</a></li>
-                    <li><a href="macroeconomie.html" aria-label="Explorer la Macroéconomie">Macroéconomie</a></li>
-                    <li><a href="finance.html" aria-label="Explorer la Finance">Finance</a></li>
-                    <li><a href="developpement.html" aria-label="Explorer le Développement">Développement</a></li>
-                    <li><a href="autres.html" aria-label="Explorer les Autres Domaines">Autres</a></li>
-                </ul>
-            </nav>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Rechercher un livre par titre ou auteur..." aria-label="Barre de recherche de livres">
-                <i class="fas fa-search search-icon"></i>
-            </div>
         </div>
-    </header>
 
-    <main class="container">
-        <section id="featured-books">
-            <h2><i class="fas fa-star featured-icon"></i> Livres Populaires ou Récents</h2>
-            <div class="book-cards-container">
-                <div class="book-card" data-title="Capital au XXIe siècle" data-author="Thomas Piketty" data-year="2013" data-category="Macroéconomie">
-                    <img src="images/capital-piketty.jpg" alt="Couverture de Capital au XXIe siècle" loading="lazy">
-                    <h3>Capital au XXIe siècle</h3>
-                    <p class="book-author">Thomas Piketty</p>
-                    <p class="book-year">2013</p>
-                    <a href="pdfs/capital-piketty.pdf" download class="download-btn" aria-label="Télécharger Capital au XXIe siècle"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-                <div class="book-card" data-title="Nudge" data-author="Richard H. Thaler, Cass R. Sunstein" data-year="2008" data-category="Microéconomie">
-                    <img src="images/nudge.jpg" alt="Couverture de Nudge" loading="lazy">
-                    <h3>Nudge</h3>
-                    <p class="book-author">Richard H. Thaler, Cass R. Sunstein</p>
-                    <p class="book-year">2008</p>
-                    <a href="pdfs/nudge.pdf" download class="download-btn" aria-label="Télécharger Nudge"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-                 <div class="book-card" data-title="La Richesse des Nations" data-author="Adam Smith" data-year="1776" data-category="Autres">
-                    <img src="images/richesse-nations.jpg" alt="Couverture de La Richesse des Nations" loading="lazy">
-                    <h3>La Richesse des Nations</h3>
-                    <p class="book-author">Adam Smith</p>
-                    <p class="book-year">1776</p>
-                    <a href="pdfs/richesse-nations.pdf" download class="download-btn" aria-label="Télécharger La Richesse des Nations"><i class="fas fa-download"></i> Télécharger</a>
-                </div>
-            </div>
-        </section>
+        <button class="hamburger-menu" aria-label="Ouvrir le menu de navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
 
-        <section id="contribution">
-            <h2><i class="fas fa-handshake contribution-icon"></i> Contribuer à la Bibliothèque</h2>
-            <p>Vous souhaitez partager vos connaissances et vos ressources ? Aidez-nous à enrichir cette bibliothèque en nous envoyant vos propres livres PDF ou recommandations.</p>
-            <a href="mailto:contact@biblioeconomique.com?subject=Contribution%20Bibliothèque%20Économique" class="btn btn-primary" aria-label="Soumettre un livre par email"><i class="fas fa-paper-plane"></i> Soumettre un livre par Email</a>
-            </section>
-    </main>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="microeconomie.html" aria-label="Explorer la Microéconomie">Microéconomie</a></li>
+                <li><a href="macroeconomie.html" aria-label="Explorer la Macroéconomie">Macroéconomie</a></li>
+                <li><a href="finance.html" aria-label="Explorer la Finance">Finance</a></li>
+                <li><a href="developpement.html" aria-label="Explorer le Développement">Développement</a></li>
+                <li><a href="autres.html" aria-label="Explorer les Autres Domaines">Autres</a></li>
+            </ul>
+        </nav>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
-            <div class="social-links">
-                <a href="#" aria-label="Suivez-nous sur Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Suivez-nous sur LinkedIn"><i class="fab fa-linkedin"></i></a>
-            </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher un livre par titre ou auteur..." aria-label="Barre de recherche de livres">
+            <i class="fas fa-search search-icon"></i>
         </div>
-    </footer>
-
-    <script src="js/main.js"></script>
-</body>
-</html>
+    </div>
+</header>
