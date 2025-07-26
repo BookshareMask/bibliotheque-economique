@@ -1,4 +1,4 @@
-/* Variables CSS pour faciliter les modifications */
+/* Variables CSS (conserver les mêmes) */
 :root {
     /* Couleurs */
     --primary-color: #2c3e50; /* Bleu foncé - reste la base */
@@ -23,7 +23,7 @@
     --font-body: 'Open Sans', sans-serif;
 }
 
-/* Styles généraux et réinitialisation */
+/* Styles généraux et réinitialisation (conserver les mêmes) */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -36,6 +36,7 @@ body {
     background-color: var(--light-bg);
     color: var(--text-color);
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Empêche le défilement horizontal dû au menu off-canvas */
 }
 
 .container {
@@ -56,14 +57,15 @@ a:hover {
 
 /* --- Header Amélioré --- */
 header {
-    background: var(--header-gradient); /* Utilisation du dégradé */
+    background: var(--header-gradient);
     color: #fff;
-    padding: 2.5rem 0 2rem; /* Plus de padding pour un look aéré */
+    padding: 2.5rem 0 2rem;
     text-align: center;
-    box-shadow: 0 8px 20px var(--shadow-header); /* Ombre plus profonde */
-    position: relative; /* Nécessaire pour les pseudo-éléments si on en ajoutait */
-    overflow: hidden; /* Assure que tout contenu interne reste dans l'en-tête */
-    animation: fadeInHeader 1s ease-out; /* Petite animation d'apparition */
+    box-shadow: 0 8px 20px var(--shadow-header);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInHeader 1s ease-out;
+    z-index: 100; /* Assure que l'en-tête est au-dessus du contenu */
 }
 
 @keyframes fadeInHeader {
@@ -71,100 +73,144 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Contenu de l'en-tête pour un meilleur alignement */
+.header-content {
+    display: flex;
+    flex-direction: column; /* Par défaut en colonne sur mobile */
+    align-items: center;
+    gap: 20px; /* Espace entre les éléments de l'en-tête */
+}
+
+.site-branding {
+    text-align: center;
+}
+
 header h1 {
     font-family: var(--font-heading);
     margin-bottom: 0.8rem;
-    font-size: 3.5em; /* Taille légèrement augmentée */
+    font-size: 3.5em;
     letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Ombre portée sur le titre */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 header p {
-    font-size: 1.2em; /* Taille de description augmentée */
+    font-size: 1.2em;
     opacity: 0.95;
     max-width: 700px;
-    margin: 0.5rem auto 2rem auto; /* Plus d'espace sous la description */
-    font-weight: 300; /* Plus léger */
+    margin: 0.5rem auto; /* Retire la marge basse car elle est gérée par gap */
+    font-weight: 300;
 }
 
-/* --- Navigation Améliorée --- */
-nav ul {
+/* --- Menu Hamburger --- */
+.hamburger-menu {
+    display: none; /* Caché par défaut sur grand écran */
+    width: 40px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    z-index: 200; /* Au-dessus de tout */
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animation du hamburger en croix */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(13px) rotate(45deg);
+}
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-13px) rotate(-45deg);
+}
+
+/* --- Navigation Principale (main-nav) --- */
+.main-nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 2.5rem; /* Plus d'espace sous la nav */
+    margin: 0; /* Pas de marge ici, gérée par le conteneur parent */
 }
 
-nav ul li {
-    margin: 0 18px 15px 18px; /* Plus d'espacement entre les liens */
+.main-nav ul li {
+    margin: 0 18px; /* Espacement entre les liens sur grand écran */
 }
 
-nav ul li a {
-    color: rgba(255, 255, 255, 0.9); /* Texte légèrement transparent */
+.main-nav ul li a {
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     padding: 0.8rem 1.6rem;
-    border-radius: 30px; /* Bordures plus arrondies */
+    border-radius: 30px;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.05em; /* Légèrement plus grand */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure subtile */
-    backdrop-filter: blur(3px); /* Effet de flou derrière les liens */
-    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
+    font-size: 1.05em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-nav ul li a:hover, nav ul li a.active {
-    background-color: rgba(255, 255, 255, 0.25); /* Plus opaque au survol */
-    transform: translateY(-4px); /* Effet de levitation plus prononcé */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Ombre au survol */
-    color: #fff; /* Couleur texte blanche pure au survol */
+.main-nav ul li a:hover, .main-nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    color: #fff;
 }
 
 /* --- Barre de recherche Améliorée --- */
 .search-container {
     position: relative;
-    max-width: 600px; /* Barre de recherche un peu plus large */
-    margin: 0 auto;
+    max-width: 600px;
+    width: 100%; /* S'assure qu'elle prend la largeur disponible dans le flexbox */
 }
 
 #searchInput {
     width: 100%;
-    padding: 15px 25px 15px 50px; /* Plus de padding, espace icône */
+    padding: 15px 25px 15px 50px;
     border: none;
-    border-radius: 35px; /* Très arrondi */
-    font-size: 1.1em; /* Texte plus grand */
+    border-radius: 35px;
+    font-size: 1.1em;
     outline: none;
-    background: var(--search-gradient); /* Dégradé pour le fond */
+    background: var(--search-gradient);
     color: var(--text-color);
-    box-shadow: 0 3px 10px var(--shadow-light); /* Ombre subtile */
+    box-shadow: 0 3px 10px var(--shadow-light);
     transition: all 0.3s ease;
 }
 
 #searchInput::placeholder {
     color: #888;
-    opacity: 0.8; /* Légèrement plus transparent */
+    opacity: 0.8;
 }
 
 #searchInput:focus {
-    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4); /* Ombre accentuée au focus */
-    transform: translateY(-2px); /* Légère levitation */
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px);
 }
 
 .search-icon {
     position: absolute;
-    left: 20px; /* Plus de padding à gauche pour l'icône */
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--primary-color); /* Couleur de l'icône plus visible */
-    font-size: 1.3em; /* Icône plus grande */
+    color: var(--primary-color);
+    font-size: 1.3em;
     opacity: 0.7;
 }
 
-
-/* --- Le reste du CSS (non modifié dans cet exemple, mais à conserver) --- */
-
+/* --- Contenu Principal (Le reste du CSS, conserver tel quel) --- */
 main {
     padding: 40px 0;
 }
@@ -231,7 +277,7 @@ h2 {
 .book-card h3 {
     font-family: var(--font-heading);
     font-size: 1.3em;
-    color: var(--primary-color); /* Changé à primary pour plus de cohérence */
+    color: var(--primary-color);
     margin-bottom: 8px;
     min-height: 2.8em;
     display: -webkit-box;
@@ -273,7 +319,7 @@ h2 {
     padding: 40px;
     background-color: #e8f5e9;
     border: 1px dashed #c8e6c9;
-    border-radius: 10px; /* Bordure un peu plus arrondie */
+    border-radius: 10px;
 }
 
 #contribution p {
@@ -286,7 +332,7 @@ h2 {
 }
 
 .btn-primary {
-    background-color: var(--secondary-accent-color); /* Utilise la nouvelle couleur secondaire pour le bouton */
+    background-color: var(--secondary-accent-color);
     color: #fff;
     padding: 12px 25px;
     border-radius: 25px;
@@ -298,7 +344,7 @@ h2 {
 }
 
 .btn-primary:hover {
-    background-color: #28a065; /* Teinte plus foncée du vert */
+    background-color: #28a065;
     transform: translateY(-2px);
 }
 
@@ -342,119 +388,178 @@ footer {
     transform: scale(1.1);
 }
 
-/* --- Responsive Design (Mis à jour pour le nouvel en-tête) --- */
-@media (max-width: 992px) {
-    header {
-        padding: 2rem 0 1.5rem;
+
+/* --- Responsive Design pour le Menu Hamburger --- */
+@media (min-width: 993px) { /* Sur les grands écrans, afficher la navigation normalement */
+    .header-content {
+        flex-direction: row; /* Horizontalement sur grand écran */
+        justify-content: space-between;
+        align-items: center;
+    }
+    .site-branding {
+        text-align: left;
     }
     header h1 {
-        font-size: 3em;
+        font-size: 2.8em; /* Ajustement pour qu'il rentre mieux avec le menu */
+        margin-bottom: 0.2rem;
     }
     header p {
-        font-size: 1.1em;
-        margin-bottom: 1.5rem;
-    }
-    nav ul li {
-        margin: 0 12px 10px 12px;
-    }
-    nav ul li a {
-        padding: 0.7rem 1.4rem;
         font-size: 1em;
+        margin: 0;
     }
-    .book-cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
+    .main-nav {
+        flex-grow: 1; /* Permet à la nav de prendre de l'espace */
+        text-align: right;
     }
-    .book-card img {
-        height: 200px;
+    .main-nav ul {
+        justify-content: flex-end; /* Aligne les liens à droite */
+    }
+    .main-nav ul li {
+        margin: 0 10px; /* Moins de marge sur grand écran */
+    }
+    .search-container {
+        max-width: 400px; /* Taille de recherche sur grand écran */
+        margin-left: 20px; /* Espacement avec la nav */
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) { /* Écrans de taille tablette/mobile */
     header {
-        padding: 1.8rem 0 1.2rem;
+        padding: 1.5rem 0; /* Moins de padding sur mobile */
+    }
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .site-branding {
+        width: 100%;
+        order: 1; /* Assure que le branding est en haut */
+        margin-bottom: 1.5rem; /* Espace sous le branding */
     }
     header h1 {
         font-size: 2.5em;
     }
     header p {
         font-size: 1em;
-        margin-bottom: 1.2rem;
+        margin: 0;
     }
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 1.5rem;
+
+    /* Le bouton hamburger apparaît */
+    .hamburger-menu {
+        display: flex;
+        position: absolute; /* Position absolue pour le placer à côté du titre */
+        top: 25px;
+        right: 20px;
+        order: 2; /* Ordre pour le positionner dans le flex container */
     }
-    nav ul li {
-        margin: 8px 0;
+
+    /* La navigation est cachée par défaut */
+    .main-nav {
+        position: fixed; /* Fixée sur le côté de l'écran */
+        top: 0;
+        left: -280px; /* Commence hors de l'écran */
+        width: 280px; /* Largeur du menu latéral */
+        height: 100%;
+        background-color: var(--secondary-color); /* Couleur de fond du menu */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        transition: left 0.4s ease-in-out; /* Animation d'apparition */
+        z-index: 150; /* Entre le header et le reste du contenu */
+        padding-top: 80px; /* Espace pour ne pas coller en haut */
+        overflow-y: auto; /* Permet le défilement si beaucoup de liens */
+        border-right: 5px solid var(--accent-color); /* Barre de couleur sur le côté */
     }
-    .container {
-        padding: 0 15px;
+
+    .main-nav.active {
+        left: 0; /* Fait apparaître le menu */
     }
-    h2 {
-        font-size: 1.8em;
-        text-align: center;
-        justify-content: center;
+
+    .main-nav ul {
+        flex-direction: column; /* Les liens s'affichent verticalement */
+        align-items: flex-start; /* Alignement à gauche */
+        padding: 20px;
     }
-    .book-cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 15px;
+
+    .main-nav ul li {
+        width: 100%;
+        margin: 10px 0; /* Espacement vertical entre les liens */
     }
-    .book-card img {
-        height: 180px;
+
+    .main-nav ul li a {
+        padding: 12px 15px; /* Ajustement du padding des liens */
+        border-radius: 8px; /* Moins arrondi pour les blocs de menu */
+        background-color: transparent; /* Fond transparent par défaut */
+        justify-content: flex-start; /* Aligne l'icône et le texte à gauche */
+        border: none; /* Pas de bordure */
     }
-    .book-card h3 {
-        font-size: 1.1em;
-        min-height: 2.6em;
+    .main-nav ul li a:hover, .main-nav ul li a.active {
+        background-color: rgba(255, 255, 255, 0.15); /* Légèrement visible au survol */
+        transform: none; /* Pas de transformation de levitation dans le menu */
+        box-shadow: none;
     }
-    .download-btn, .btn-primary {
-        font-size: 0.9em;
-        padding: 10px 15px;
+
+    .search-container {
+        order: 3; /* Positionnement en bas dans le header mobile */
+        width: calc(100% - 40px); /* Laisse de l'espace sur les côtés */
+        max-width: none;
+        margin: 0 auto;
     }
-    #searchInput {
-        padding: 12px 20px 12px 45px;
-        font-size: 1em;
+
+    /* Overlay pour cacher le reste de la page quand le menu est ouvert */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 120;
     }
-    .search-icon {
-        font-size: 1.1em;
-        left: 18px;
+    .overlay.active {
+        display: block;
     }
 }
 
+/* Ajustements pour les très petits écrans si nécessaire */
 @media (max-width: 480px) {
     header h1 {
         font-size: 2em;
     }
-    header p {
-        font-size: 0.9em;
+    .site-branding {
+        margin-bottom: 1rem;
     }
-    nav ul li a {
-        font-size: 0.9em;
-        padding: 0.6rem 1rem;
+    .hamburger-menu {
+        top: 20px;
+        right: 15px;
+        width: 35px;
+        height: 25px;
+    }
+    .hamburger-menu .bar {
+        height: 3px;
+    }
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+    .main-nav {
+        width: 250px;
+    }
+    .main-nav ul {
+        padding: 15px;
+    }
+    .main-nav ul li a {
+        font-size: 0.95em;
+        padding: 10px 12px;
     }
     #searchInput {
-        padding: 10px 15px 10px 40px;
-        font-size: 0.9em;
+        padding: 12px 18px 12px 40px;
+        font-size: 0.95em;
     }
     .search-icon {
-        font-size: 1em;
         left: 15px;
-    }
-    h2 {
-        font-size: 1.5em;
-        padding-bottom: 10px;
-    }
-    .book-cards-container {
-        grid-template-columns: 1fr;
-    }
-    .book-card img {
-        height: 200px;
-    }
-    #contribution {
-        padding: 25px 15px;
-    }
-    #contribution p {
-        font-size: 1em;
+        font-size: 1.1em;
     }
 }
