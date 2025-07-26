@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Microéconomie - Bibliothèque Économique</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microéconomie - Bibliothèque Économique</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Microéconomie</h1>
-    <p>Livres disponibles dans le secteur de la microéconomie</p>
-    <input type="text" id="searchInput" placeholder="Rechercher un livre...">
-    <a href="index.html" style="color:white; text-decoration:underline;">← Retour à l'accueil</a>
-  </header>
+    <header>
+        <h1>Microéconomie</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="macroeconomie.html">Macroéconomie</a></li>
+                <li><a href="finance.html">Finance</a></li>
+                <li><a href="developpement.html">Développement</a></li>
+                <li><a href="autres.html">Autres</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher un livre...">
+        </div>
+    </header>
 
-  <main>
-    <section class="categories">
-      <div class="category-card">
-        <h2>Théorie du consommateur</h2>
-        <p><a href="#" download>Lien vers le livre (PDF)</a></p>
-      </div>
-      <div class="category-card">
-        <h2>Théorie de la production</h2>
-        <p><a href="#" download>Télécharger le livre</a></p>
-      </div>
-      <div class="category-card">
-        <h2>Équilibre partiel et général</h2>
-        <p><a href="#" download>Consulter</a></p>
-      </div>
-    </section>
-  </main>
+    <main id="bookList">
+        <section class="book-group">
+            <h2>Théorie du Consommateur</h2>
+            <div class="book-cards-container">
+                <div class="book-card" data-title="Microéconomie: Une approche moderne">
+                    <img src="images/micro-livre1.jpg" alt="Couverture de Microéconomie: Une approche moderne">
+                    <h3>Microéconomie: Une approche moderne</h3>
+                    <a href="pdfs/micro-livre1.pdf" download class="download-btn">Télécharger</a>
+                </div>
+                <div class="book-card" data-title="Choix et demande">
+                    <img src="images/micro-livre2.jpg" alt="Couverture de Choix et demande">
+                    <h3>Choix et demande</h3>
+                    <a href="pdfs/micro-livre2.pdf" download class="download-btn">Télécharger</a>
+                </div>
+            </div>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 Bibliothèque Économique</p>
-  </footer>
-  <script>
-  const searchInput = document.getElementById('searchInput');
-  const books = document.querySelectorAll('.category-card');
+        <section class="book-group">
+            <h2>Théorie de la Production</h2>
+            <div class="book-cards-container">
+                </div>
+        </section>
+    </main>
 
-  searchInput.addEventListener('keyup', function () {
-    const term = this.value.toLowerCase();
-    books.forEach(book => {
-      const title = book.innerText.toLowerCase();
-      book.style.display = title.includes(term) ? 'block' : 'none';
-    });
-  });
-</script>
+    <footer>
+        <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
