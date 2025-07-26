@@ -117,7 +117,7 @@ header p {
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
-    z-index: 200;
+    z-index: 200; /* Assure qu'il est au-dessus du menu */
 }
 
 .hamburger-menu .bar {
@@ -497,17 +497,8 @@ footer {
     header {
         padding: 1.5rem 0; /* Moins de padding sur mobile */
     }
-    .header-content {
-        /* Pas besoin de redéfinir, c'est la version par défaut/mobile-first */
-        /* flex-direction: column;
-        align-items: center;
-        gap: 20px; */
-    }
-    .site-branding {
-        width: 100%;
-        order: 1;
-        margin-bottom: 1.5rem;
-    }
+    /* .header-content est déjà en 'column' par défaut */
+    /* .site-branding est déjà ordonné '1' par défaut */
     header h1 {
         font-size: 2.5em;
     }
@@ -525,15 +516,10 @@ footer {
         order: 2; /* Ordre dans la flexbox du header-content */
     }
 
-    /* Le main-nav est défini par défaut comme le menu latéral (mobile-first) */
-    /* .main-nav { ... } // Définis en dehors de la media query pour être mobile-first */
-    /* .main-nav.active { ... } // Définis en dehors de la media query */
-
-    /* .main-nav ul { ... } // Définis en dehors de la media query */
-    /* .main-nav ul li { ... } // Définis en dehors de la media query */
-
-    /* .main-nav ul li a { ... } // Définis en dehors de la media query pour les couleurs */
-    /* .main-nav ul li a:hover, .main-nav ul li a.active { ... } // Définis en dehors */
+    /* .main-nav est déjà le menu latéral par défaut */
+    /* .main-nav.active est déjà géré */
+    /* .main-nav ul est déjà en 'column' par défaut */
+    /* .main-nav ul li a est déjà stylisé pour mobile par défaut */
 
     .search-container {
         order: 3; /* Positionnement de la recherche après le branding et le menu hamburger sur mobile */
@@ -542,9 +528,7 @@ footer {
         margin: 0 auto; /* Centrage */
     }
 
-    /* L'overlay est géré par JS, mais on s'assure qu'il est bien display: block quand actif */
-    /* .overlay { ... } // Définis en dehors de la media query */
-    /* .overlay.active { ... } // Définis en dehors de la media query */
+    /* .overlay est déjà géré par défaut/JS */
 
     /* Styles pour le contenu principal sur mobile */
     .book-cards-container {
