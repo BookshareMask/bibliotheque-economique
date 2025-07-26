@@ -91,13 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Empêcher le défilement du body quand le menu est ouvert (CSS pour cela est .no-scroll)
-    document.body.classList.remove('no-scroll'); // S'assurer que le défilement est réactivé au chargement
+    // S'assurer que le défilement est réactivé au chargement si jamais il était bloqué
+    document.body.classList.remove('no-scroll');
 });
-
-// CSS pour la classe no-scroll (à ajouter à style.css)
-/*
-body.no-scroll {
-    overflow: hidden;
-}
-*/
