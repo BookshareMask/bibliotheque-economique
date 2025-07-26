@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bibliothèque Économique</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèque Économique</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
-    <h1>Bibliothèque Économique</h1>
-    <p>Explorez, lisez et contribuez à notre collection de livres en économie classés par secteur.</p>
-    <input type="text" id="searchBar" placeholder="🔍 Rechercher un livre...">
-  </header>
+    <header>
+        <h1>Bibliothèque Économique</h1>
+        <p>Votre ressource incontournable pour les livres et les recherches en économie, organisée par secteurs clés.</p>
+        <nav>
+            <ul>
+                <li><a href="microeconomie.html">Microéconomie</a></li>
+                <li><a href="macroeconomie.html">Macroéconomie</a></li>
+                <li><a href="finance.html">Finance</a></li>
+                <li><a href="developpement.html">Développement</a></li>
+                <li><a href="autres.html">Autres</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher un livre...">
+        </div>
+    </header>
 
-  <main>
-    <section class="categories">
-      <a href="microeconomie.html" class="category-card">Microéconomie</a>
-      <a href="macroeconomie.html" class="category-card">Macroéconomie</a>
-      <a href="finance.html" class="category-card">Finance</a>
-      <a href="developpement.html" class="category-card">Économie du développement</a>
-      <a href="contribute.html" class="category-card contribute">📤 Contribuer</a>
-    </section>
-  </main>
+    <main>
+        <section id="featured-books">
+            <h2>Livres Mis en Avant</h2>
+            </section>
 
-  <footer>
-    <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
-  </footer>
+        <section id="contribution">
+            <h2>Contribuer à la Bibliothèque</h2>
+            <p>Vous pouvez nous aider à enrichir la bibliothèque en envoyant vos propres livres PDF via ce lien.</p>
+            <a href="mailto:votre_email@example.com?subject=Contribution%20Bibliothèque%20Économique" class="btn">Soumettre un livre</a>
+            </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
