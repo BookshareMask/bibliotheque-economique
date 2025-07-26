@@ -11,17 +11,29 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>Microéconomie</h1>
-            <nav>
+        <div class="container header-content">
+            <div class="site-branding">
+                <h1>Microéconomie</h1>
+                <p>Explorez les principes fondamentaux du comportement individuel des agents économiques et des marchés.</p>
+            </div>
+
+            <button class="hamburger-menu" aria-label="Ouvrir le menu de navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="main-nav">
                 <ul>
                     <li><a href="index.html" aria-label="Retour à l'Accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="microeconomie.html" aria-label="Explorer la Microéconomie">Microéconomie</a></li>
                     <li><a href="macroeconomie.html" aria-label="Explorer la Macroéconomie">Macroéconomie</a></li>
                     <li><a href="finance.html" aria-label="Explorer la Finance">Finance</a></li>
                     <li><a href="developpement.html" aria-label="Explorer le Développement">Développement</a></li>
                     <li><a href="autres.html" aria-label="Explorer les Autres Domaines">Autres</a></li>
                 </ul>
             </nav>
+
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Rechercher un livre par titre ou auteur..." aria-label="Barre de recherche de livres">
                 <i class="fas fa-search search-icon"></i>
@@ -47,6 +59,13 @@
                     <p class="book-year">2020</p>
                     <a href="pdfs/micro-choix-demande.pdf" download class="download-btn" aria-label="Télécharger Choix et demande"><i class="fas fa-download"></i> Télécharger</a>
                 </div>
+                 <div class="book-card" data-title="Théorie des jeux" data-author="Roger B. Myerson" data-year="1991" data-category="Microéconomie">
+                    <img src="images/micro-jeux.jpg" alt="Couverture de Théorie des jeux" loading="lazy">
+                    <h3>Théorie des jeux</h3>
+                    <p class="book-author">Roger B. Myerson</p>
+                    <p class="book-year">1991</p>
+                    <a href="pdfs/micro-jeux.pdf" download class="download-btn" aria-label="Télécharger Théorie des jeux"><i class="fas fa-download"></i> Télécharger</a>
+                </div>
                 </div>
         </section>
 
@@ -59,6 +78,13 @@
                     <p class="book-author">Jean-Jacques Laffont</p>
                     <p class="book-year">2000</p>
                     <a href="pdfs/micro-laffont.pdf" download class="download-btn" aria-label="Télécharger L'entreprise et les marchés"><i class="fas fa-download"></i> Télécharger</a>
+                </div>
+                <div class="book-card" data-title="Économie industrielle" data-author="Jean Tirole" data-year="1988" data-category="Microéconomie">
+                    <img src="images/micro-tirole.jpg" alt="Couverture de Économie industrielle" loading="lazy">
+                    <h3>Économie industrielle</h3>
+                    <p class="book-author">Jean Tirole</p>
+                    <p class="book-year">1988</p>
+                    <a href="pdfs/micro-tirole.pdf" download class="download-btn" aria-label="Télécharger Économie industrielle"><i class="fas fa-download"></i> Télécharger</a>
                 </div>
                 </div>
         </section>
