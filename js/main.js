@@ -3,29 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookListContainer = document.getElementById('bookList') || document.getElementById('featured-books');
     const noResultsMessage = document.getElementById('noResults');
 
-    // Nouveaux éléments pour le menu hamburger
     const hamburgerMenu = document.querySelector('.hamburger-menu');
     const mainNav = document.querySelector('.main-nav');
-    let overlay = document.querySelector('.overlay'); // Récupère l'overlay s'il existe déjà
+    let overlay = document.querySelector('.overlay');
 
-    // Créer l'overlay si non existant (utile pour le premier chargement)
-    // C'est mieux de le créer en HTML si possible, mais ce code est robuste
     if (!overlay) {
         overlay = document.createElement('div');
         overlay.classList.add('overlay');
         document.body.appendChild(overlay);
     }
 
-    // Gestion de l'ouverture/fermeture du menu hamburger
     if (hamburgerMenu && mainNav && overlay) {
         hamburgerMenu.addEventListener('click', () => {
             hamburgerMenu.classList.toggle('active');
             mainNav.classList.toggle('active');
-            overlay.classList.toggle('active'); // Active/désactive l'overlay
-            document.body.classList.toggle('no-scroll'); // Empêche le défilement du body
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
         });
 
-        // Fermer le menu si l'on clique sur l'overlay
         overlay.addEventListener('click', () => {
             if (hamburgerMenu.classList.contains('active')) {
                 hamburgerMenu.classList.remove('active');
@@ -35,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Fermer le menu si un lien de navigation est cliqué (pour les pages de secteur)
+        // Fermer le menu si un lien de navigation est cliqué
         mainNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                // Ne ferme le menu que si on est sur mobile (le menu est actif)
-                // On vérifie la taille de l'écran ou si la classe active est présente
-                if (window.innerWidth <= 992 && hamburgerMenu.classList.contains('active')) {
+                // Cette condition assure que le menu se ferme quand un lien est cliqué
+                // peu importe la taille de l'écran, tant que le menu est ouvert.
+                if (hamburgerMenu.classList.contains('active')) {
                     hamburgerMenu.classList.remove('active');
                     mainNav.classList.remove('active');
                     overlay.classList.remove('active');
@@ -50,11 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Fonctionnalité de recherche
     if (searchInput && bookListContainer) {
         searchInput.addEventListener('keyup', (event) => {
             const searchTerm = event.target.value.toLowerCase().trim();
-            // Cible les cartes de livres dans toutes les sections de la page
             const bookCards = bookListContainer.querySelectorAll('.book-card');
             let resultsFound = false;
 
@@ -83,21 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gestion de la classe 'active' pour la navigation
     const navLinks = document.querySelectorAll('.main-nav ul li a');
-    const currentPath = window.location.pathname.split('/').pop(); // Récupère le nom du fichier courant
+    const currentPath = window.location.pathname.split('/').pop();
 
     navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href'); // Récupère le href du lien (ex: "index.html")
-
-        // Gère la page d'accueil ('index.html' ou '')
+        const linkHref = link.getAttribute('href');
         if (currentPath === '' && linkHref === 'index.html') {
              link.classList.add('active');
         } else if (linkHref === currentPath) {
             link.classList.add('active');
         } else {
-            link.classList.remove('active'); // S'assure que seule la page actuelle est active
+            link.classList.remove('active');
         }
     });
 
-    // S'assurer que le défilement est réactivé au chargement si jamais il était bloqué
     document.body.classList.remove('no-scroll');
 });
