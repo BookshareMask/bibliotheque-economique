@@ -4,51 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microéconomie - Bibliothèque Économique</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Microéconomie</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="macroeconomie.html">Macroéconomie</a></li>
-                <li><a href="finance.html">Finance</a></li>
-                <li><a href="developpement.html">Développement</a></li>
-                <li><a href="autres.html">Autres</a></li>
-            </ul>
-        </nav>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Rechercher un livre...">
+        <div class="container">
+            <h1>Microéconomie</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html" aria-label="Retour à l'Accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="macroeconomie.html" aria-label="Explorer la Macroéconomie">Macroéconomie</a></li>
+                    <li><a href="finance.html" aria-label="Explorer la Finance">Finance</a></li>
+                    <li><a href="developpement.html" aria-label="Explorer le Développement">Développement</a></li>
+                    <li><a href="autres.html" aria-label="Explorer les Autres Domaines">Autres</a></li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Rechercher un livre par titre ou auteur..." aria-label="Barre de recherche de livres">
+                <i class="fas fa-search search-icon"></i>
+            </div>
         </div>
     </header>
 
-    <main id="bookList">
+    <main class="container" id="bookList">
         <section class="book-group">
-            <h2>Théorie du Consommateur</h2>
+            <h2><i class="fas fa-chart-pie group-icon"></i> Théorie du Consommateur</h2>
             <div class="book-cards-container">
-                <div class="book-card" data-title="Microéconomie: Une approche moderne">
-                    <img src="images/micro-livre1.jpg" alt="Couverture de Microéconomie: Une approche moderne">
+                <div class="book-card" data-title="Microéconomie: Une approche moderne" data-author="Hal R. Varian" data-year="2014" data-category="Microéconomie">
+                    <img src="images/micro-varian.jpg" alt="Couverture de Microéconomie: Une approche moderne" loading="lazy">
                     <h3>Microéconomie: Une approche moderne</h3>
-                    <a href="pdfs/micro-livre1.pdf" download class="download-btn">Télécharger</a>
+                    <p class="book-author">Hal R. Varian</p>
+                    <p class="book-year">2014</p>
+                    <a href="pdfs/micro-varian.pdf" download class="download-btn" aria-label="Télécharger Microéconomie: Une approche moderne"><i class="fas fa-download"></i> Télécharger</a>
                 </div>
-                <div class="book-card" data-title="Choix et demande">
-                    <img src="images/micro-livre2.jpg" alt="Couverture de Choix et demande">
+                <div class="book-card" data-title="Choix et demande" data-author="Andreou et al." data-year="2020" data-category="Microéconomie">
+                    <img src="images/micro-choix-demande.jpg" alt="Couverture de Choix et demande" loading="lazy">
                     <h3>Choix et demande</h3>
-                    <a href="pdfs/micro-livre2.pdf" download class="download-btn">Télécharger</a>
+                    <p class="book-author">Andreou et al.</p>
+                    <p class="book-year">2020</p>
+                    <a href="pdfs/micro-choix-demande.pdf" download class="download-btn" aria-label="Télécharger Choix et demande"><i class="fas fa-download"></i> Télécharger</a>
                 </div>
-            </div>
+                </div>
         </section>
 
         <section class="book-group">
-            <h2>Théorie de la Production</h2>
+            <h2><i class="fas fa-industry group-icon"></i> Théorie de la Production et des Coûts</h2>
             <div class="book-cards-container">
+                <div class="book-card" data-title="L'entreprise et les marchés" data-author="Jean-Jacques Laffont" data-year="2000" data-category="Microéconomie">
+                    <img src="images/micro-laffont.jpg" alt="Couverture de L'entreprise et les marchés" loading="lazy">
+                    <h3>L'entreprise et les marchés</h3>
+                    <p class="book-author">Jean-Jacques Laffont</p>
+                    <p class="book-year">2000</p>
+                    <a href="pdfs/micro-laffont.pdf" download class="download-btn" aria-label="Télécharger L'entreprise et les marchés"><i class="fas fa-download"></i> Télécharger</a>
+                </div>
                 </div>
         </section>
+
+        <div id="noResults" class="message-info" style="display: none;">
+            <p><i class="fas fa-info-circle"></i> Aucun livre ne correspond à votre recherche dans cette section.</p>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
+        <div class="container">
+            <p>&copy; 2025 Bibliothèque Économique. Tous droits réservés.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Suivez-nous sur Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Suivez-nous sur LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
