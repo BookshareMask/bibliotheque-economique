@@ -1,4 +1,4 @@
-/* Variables CSS (conserver les mêmes) */
+/* Variables CSS pour faciliter les modifications */
 :root {
     /* Couleurs */
     --primary-color: #2c3e50; /* Bleu foncé - reste la base */
@@ -23,7 +23,7 @@
     --font-body: 'Open Sans', sans-serif;
 }
 
-/* Styles généraux et réinitialisation (conserver les mêmes) */
+/* Styles généraux et réinitialisation */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -37,6 +37,10 @@ body {
     color: var(--text-color);
     scroll-behavior: smooth;
     overflow-x: hidden; /* Empêche le défilement horizontal dû au menu off-canvas */
+}
+
+body.no-scroll {
+    overflow: hidden; /* Empêche le défilement du body quand le menu est ouvert */
 }
 
 .container {
@@ -55,7 +59,7 @@ a:hover {
     color: var(--primary-color);
 }
 
-/* --- Header Amélioré --- */
+/* --- Styles du Header (Appliqués par défaut, puis modifiés par media queries) --- */
 header {
     background: var(--header-gradient);
     color: #fff;
@@ -65,7 +69,7 @@ header {
     position: relative;
     overflow: hidden;
     animation: fadeInHeader 1s ease-out;
-    z-index: 100; /* Assure que l'en-tête est au-dessus du contenu */
+    z-index: 100;
 }
 
 @keyframes fadeInHeader {
@@ -73,12 +77,12 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Contenu de l'en-tête pour un meilleur alignement */
+/* Conteneur du contenu de l'en-tête (s'adapte au responsive) */
 .header-content {
     display: flex;
-    flex-direction: column; /* Par défaut en colonne sur mobile */
+    flex-direction: column; /* Par défaut en colonne (mobile first) */
     align-items: center;
-    gap: 20px; /* Espace entre les éléments de l'en-tête */
+    gap: 20px;
 }
 
 .site-branding {
@@ -97,13 +101,13 @@ header p {
     font-size: 1.2em;
     opacity: 0.95;
     max-width: 700px;
-    margin: 0.5rem auto; /* Retire la marge basse car elle est gérée par gap */
+    margin: 0.5rem auto;
     font-weight: 300;
 }
 
-/* --- Menu Hamburger --- */
+/* --- Menu Hamburger (caché par défaut sur PC, affiché sur mobile) --- */
 .hamburger-menu {
-    display: none; /* Caché par défaut sur grand écran */
+    display: none; /* Caché sur grand écran */
     width: 40px;
     height: 30px;
     background: none;
@@ -112,7 +116,7 @@ header p {
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
-    z-index: 200; /* Au-dessus de tout */
+    z-index: 200;
 }
 
 .hamburger-menu .bar {
@@ -125,15 +129,9 @@ header p {
 }
 
 /* Animation du hamburger en croix */
-.hamburger-menu.active .bar:nth-child(1) {
-    transform: translateY(13px) rotate(45deg);
-}
-.hamburger-menu.active .bar:nth-child(2) {
-    opacity: 0;
-}
-.hamburger-menu.active .bar:nth-child(3) {
-    transform: translateY(-13px) rotate(-45deg);
-}
+.hamburger-menu.active .bar:nth-child(1) { transform: translateY(13px) rotate(45deg); }
+.hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
+.hamburger-menu.active .bar:nth-child(3) { transform: translateY(-13px) rotate(-45deg); }
 
 /* --- Navigation Principale (main-nav) --- */
 .main-nav ul {
@@ -141,15 +139,15 @@ header p {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 0; /* Pas de marge ici, gérée par le conteneur parent */
+    margin: 0;
 }
 
 .main-nav ul li {
-    margin: 0 18px; /* Espacement entre les liens sur grand écran */
+    margin: 0 18px;
 }
 
 .main-nav ul li a {
-    color: rgba(255, 255, 255, 0.9);
+    color: #fff; /* Couleur blanche pure par défaut pour PC */
     font-weight: 600;
     padding: 0.8rem 1.6rem;
     border-radius: 30px;
@@ -158,9 +156,9 @@ header p {
     align-items: center;
     gap: 10px;
     font-size: 1.05em;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(3px);
-    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure subtile */
+    backdrop-filter: blur(3px); /* Effet de flou derrière les liens */
+    background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement transparent */
 }
 
 .main-nav ul li a:hover, .main-nav ul li a.active {
@@ -170,11 +168,11 @@ header p {
     color: #fff;
 }
 
-/* --- Barre de recherche Améliorée --- */
+/* --- Barre de recherche --- */
 .search-container {
     position: relative;
     max-width: 600px;
-    width: 100%; /* S'assure qu'elle prend la largeur disponible dans le flexbox */
+    width: 100%;
 }
 
 #searchInput {
@@ -210,7 +208,7 @@ header p {
     opacity: 0.7;
 }
 
-/* --- Contenu Principal (Le reste du CSS, conserver tel quel) --- */
+/* --- Contenu Principal --- */
 main {
     padding: 40px 0;
 }
@@ -388,42 +386,77 @@ footer {
     transform: scale(1.1);
 }
 
+/* --- Media Queries pour la Responsivité --- */
 
-/* --- Responsive Design pour le Menu Hamburger --- */
-@media (min-width: 993px) { /* Sur les grands écrans, afficher la navigation normalement */
+/* Sur les grands écrans (PC : min-width 993px et plus) */
+@media (min-width: 993px) {
     .header-content {
-        flex-direction: row; /* Horizontalement sur grand écran */
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: row; /* Disposition horizontale */
+        justify-content: space-between; /* Espacement optimal */
+        align-items: center; /* Centrage vertical */
+        flex-wrap: nowrap; /* Empêche les retours à la ligne */
     }
+
     .site-branding {
         text-align: left;
+        flex-shrink: 0; /* Ne pas réduire la taille */
     }
     header h1 {
-        font-size: 2.8em; /* Ajustement pour qu'il rentre mieux avec le menu */
+        font-size: 2.8em; /* Ajustement pour s'intégrer horizontalement */
         margin-bottom: 0.2rem;
     }
     header p {
         font-size: 1em;
         margin: 0;
     }
+
+    /* Cacher le bouton hamburger sur PC */
+    .hamburger-menu {
+        display: none;
+    }
+
+    /* Afficher la navigation normalement sur PC */
     .main-nav {
-        flex-grow: 1; /* Permet à la nav de prendre de l'espace */
-        text-align: right;
+        display: block; /* S'assure qu'elle est visible */
+        position: static; /* Retire le positionnement fixe du mobile */
+        width: auto; /* Retire la largeur fixe du mobile */
+        height: auto; /* Retire la hauteur fixe du mobile */
+        background-color: transparent; /* Retire le fond du menu mobile */
+        box-shadow: none; /* Retire l'ombre du menu mobile */
+        transition: none; /* Retire les transitions de position */
+        padding-top: 0;
+        overflow-y: visible;
+        border-right: none;
+        flex-grow: 1; /* Permet à la nav de prendre l'espace restant */
+        text-align: right; /* Aligne les liens de nav à droite */
     }
     .main-nav ul {
+        flex-direction: row; /* Revert à l'horizontal */
         justify-content: flex-end; /* Aligne les liens à droite */
     }
     .main-nav ul li {
-        margin: 0 10px; /* Moins de marge sur grand écran */
+        margin: 0 10px; /* Espacement entre les liens sur grand écran */
     }
+    .main-nav ul li a {
+        color: #fff; /* Assure la couleur blanche sur grand écran */
+        background-color: rgba(255, 255, 255, 0.1); /* Conserve le fond subtil */
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
     .search-container {
         max-width: 400px; /* Taille de recherche sur grand écran */
         margin-left: 20px; /* Espacement avec la nav */
+        flex-shrink: 0; /* Ne pas réduire la taille */
+    }
+
+    /* L'overlay n'est pas nécessaire sur grand écran */
+    .overlay {
+        display: none !important; /* Force la disparition de l'overlay */
     }
 }
 
-@media (max-width: 992px) { /* Écrans de taille tablette/mobile */
+/* Sur les écrans de taille tablette/mobile (max-width 992px) */
+@media (max-width: 992px) {
     header {
         padding: 1.5rem 0; /* Moins de padding sur mobile */
     }
@@ -434,8 +467,8 @@ footer {
     }
     .site-branding {
         width: 100%;
-        order: 1; /* Assure que le branding est en haut */
-        margin-bottom: 1.5rem; /* Espace sous le branding */
+        order: 1;
+        margin-bottom: 1.5rem;
     }
     header h1 {
         font-size: 2.5em;
@@ -445,33 +478,33 @@ footer {
         margin: 0;
     }
 
-    /* Le bouton hamburger apparaît */
+    /* Le bouton hamburger apparaît sur mobile */
     .hamburger-menu {
-        display: flex;
-        position: absolute; /* Position absolue pour le placer à côté du titre */
+        display: flex; /* Affiché sur mobile */
+        position: absolute;
         top: 25px;
         right: 20px;
-        order: 2; /* Ordre pour le positionner dans le flex container */
+        order: 2;
     }
 
-    /* La navigation est cachée par défaut */
+    /* La navigation est cachée par défaut sur mobile, s'affiche en latéral */
     .main-nav {
-        position: fixed; /* Fixée sur le côté de l'écran */
+        position: fixed;
         top: 0;
-        left: -280px; /* Commence hors de l'écran */
-        width: 280px; /* Largeur du menu latéral */
+        left: -280px; /* Hors de l'écran */
+        width: 280px;
         height: 100%;
-        background-color: var(--secondary-color); /* Couleur de fond du menu */
+        background-color: var(--secondary-color);
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-        transition: left 0.4s ease-in-out; /* Animation d'apparition */
-        z-index: 150; /* Entre le header et le reste du contenu */
-        padding-top: 80px; /* Espace pour ne pas coller en haut */
-        overflow-y: auto; /* Permet le défilement si beaucoup de liens */
-        border-right: 5px solid var(--accent-color); /* Barre de couleur sur le côté */
+        transition: left 0.4s ease-in-out;
+        z-index: 150;
+        padding-top: 80px;
+        overflow-y: auto;
+        border-right: 5px solid var(--accent-color);
     }
-
+    /* Quand le menu est actif */
     .main-nav.active {
-        left: 0; /* Fait apparaître le menu */
+        left: 0;
     }
 
     .main-nav ul {
@@ -479,28 +512,26 @@ footer {
         align-items: flex-start; /* Alignement à gauche */
         padding: 20px;
     }
-
     .main-nav ul li {
         width: 100%;
-        margin: 10px 0; /* Espacement vertical entre les liens */
+        margin: 10px 0;
     }
-
     .main-nav ul li a {
-        padding: 12px 15px; /* Ajustement du padding des liens */
-        border-radius: 8px; /* Moins arrondi pour les blocs de menu */
-        background-color: transparent; /* Fond transparent par défaut */
-        justify-content: flex-start; /* Aligne l'icône et le texte à gauche */
-        border: none; /* Pas de bordure */
+        padding: 12px 15px;
+        border-radius: 8px;
+        background-color: transparent; /* Fond transparent pour les liens du menu mobile */
+        justify-content: flex-start;
+        border: none; /* Pas de bordure pour les liens du menu mobile */
     }
     .main-nav ul li a:hover, .main-nav ul li a.active {
-        background-color: rgba(255, 255, 255, 0.15); /* Légèrement visible au survol */
-        transform: none; /* Pas de transformation de levitation dans le menu */
+        background-color: rgba(255, 255, 255, 0.15);
+        transform: none;
         box-shadow: none;
     }
 
     .search-container {
-        order: 3; /* Positionnement en bas dans le header mobile */
-        width: calc(100% - 40px); /* Laisse de l'espace sur les côtés */
+        order: 3;
+        width: calc(100% - 40px);
         max-width: none;
         margin: 0 auto;
     }
@@ -519,12 +550,32 @@ footer {
     .overlay.active {
         display: block;
     }
+
+    /* Styles pour le contenu principal sur mobile */
+    .book-cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+    }
+    .book-card img {
+        height: 180px;
+    }
+    .book-card h3 {
+        font-size: 1.1em;
+        min-height: 2.6em;
+    }
+    .download-btn, .btn-primary {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
 }
 
-/* Ajustements pour les très petits écrans si nécessaire */
+/* Ajustements pour les très petits écrans */
 @media (max-width: 480px) {
     header h1 {
         font-size: 2em;
+    }
+    header p {
+        font-size: 0.9em;
     }
     .site-branding {
         margin-bottom: 1rem;
@@ -538,12 +589,8 @@ footer {
     .hamburger-menu .bar {
         height: 3px;
     }
-    .hamburger-menu.active .bar:nth-child(1) {
-        transform: translateY(11px) rotate(45deg);
-    }
-    .hamburger-menu.active .bar:nth-child(3) {
-        transform: translateY(-11px) rotate(-45deg);
-    }
+    .hamburger-menu.active .bar:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+    .hamburger-menu.active .bar:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
     .main-nav {
         width: 250px;
     }
@@ -562,7 +609,20 @@ footer {
         left: 15px;
         font-size: 1.1em;
     }
-}
-body.no-scroll {
-    overflow: hidden;
+    h2 {
+        font-size: 1.5em;
+        padding-bottom: 10px;
+    }
+    .book-cards-container {
+        grid-template-columns: 1fr; /* Une seule colonne sur très petits écrans */
+    }
+    .book-card img {
+        height: 200px;
+    }
+    #contribution {
+        padding: 25px 15px;
+    }
+    #contribution p {
+        font-size: 1em;
+    }
 }
