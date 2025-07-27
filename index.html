@@ -4,116 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliothèque Économique - Accueil</title>
-    <meta name="description" content="Votre bibliothèque numérique incontournable pour accéder facilement à une vaste collection de ressources économiques essentielles.">
+    <meta name="description" content="Plateforme gratuite de ressources économiques pour étudiants, chercheurs et passionnés">
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Préchargement des polices -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"></noscript>
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Préchargement Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></noscript>
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=20230727">
+    <!-- CSS critique intégré -->
+    <style>
+    /* Styles critiques pour le chargement initial */
+    body {
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        line-height: 1.6;
+        color: #333;
+    }
+    .header {
+        background: linear-gradient(135deg, #2c3e50, #1a252f);
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .main-content {
+        margin-top: 100px;
+    }
+    </style>
+    
+    <!-- Chargement asynchrone du CSS complet -->
+    <link rel="stylesheet" href="css/style.css?v=20230727" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/style.css?v=20230727"></noscript>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-title">
-                <h1>Bibliothèque Économique</h1>
-                <p>Votre ressource centrale pour les livres et documents d'économie</p>
+    <header class="header" role="banner">
+        <div class="container header-content">
+            <div class="header-brand">
+                <h1 class="site-title">Bibliothèque Économique</h1>
+                <p class="site-tagline">Ressources académiques gratuites en économie</p>
             </div>
             
-            <!-- Mobile Menu Button -->
-            <button class="hamburger" aria-label="Menu" aria-expanded="false">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </button>
-            
-            <!-- Search Bar -->
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Rechercher un livre, auteur..." aria-label="Rechercher un livre">
-                <button id="searchButton" aria-label="Lancer la recherche"><i class="fas fa-search"></i></button>
+            <div class="header-actions">
+                <!-- Search Bar -->
+                <form class="search-form" role="search">
+                    <div class="search-container">
+                        <input type="search" id="searchInput" placeholder="Rechercher un livre..." 
+                               aria-label="Rechercher dans la bibliothèque" autocomplete="off">
+                        <button type="submit" class="search-button" aria-label="Lancer la recherche">
+                            <i class="fas fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Mobile Menu Button -->
+                <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
             </div>
         </div>
     </header>
     
-    <!-- Overlay for mobile menu -->
-    <div class="overlay"></div>
-    
     <!-- Navigation -->
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a></li>
-            <li><a href="microeconomie.html"><i class="fas fa-chart-line"></i> Microéconomie</a></li>
-            <li><a href="macroeconomie.html"><i class="fas fa-chart-bar"></i> Macroéconomie</a></li>
-            <li><a href="finance.html"><i class="fas fa-coins"></i> Finance</a></li>
-            <li><a href="developpement.html"><i class="fas fa-globe-africa"></i> Développement</a></li>
-            <li><a href="autres.html"><i class="fas fa-book"></i> Autres Domaines</a></li>
-        </ul>
-        
-        <div class="nav-footer">
-            <p>Bibliothèque Économique © 2023</p>
-            <div class="social-links">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <nav id="main-navigation" class="main-nav" role="navigation" aria-label="Menu principal">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link active" aria-current="page"><i class="fas fa-home nav-icon"></i> Accueil</a></li>
+                <li><a href="microeconomie.html" class="nav-link"><i class="fas fa-chart-line nav-icon"></i> Microéconomie</a></li>
+                <li><a href="macroeconomie.html" class="nav-link"><i class="fas fa-chart-bar nav-icon"></i> Macroéconomie</a></li>
+                <li><a href="finance.html" class="nav-link"><i class="fas fa-coins nav-icon"></i> Finance</a></li>
+                <li><a href="developpement.html" class="nav-link"><i class="fas fa-globe-africa nav-icon"></i> Développement</a></li>
+                <li><a href="autres.html" class="nav-link"><i class="fas fa-book nav-icon"></i> Autres Domaines</a></li>
+            </ul>
+            
+            <div class="nav-footer">
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p class="copyright">Bibliothèque Économique © <span id="current-year"></span></p>
             </div>
         </div>
     </nav>
     
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" role="presentation"></div>
+    
     <!-- Main Content -->
-    <main class="main-content">
-        <!-- Featured Books Section -->
-        <section class="featured-section">
-            <h2><i class="fas fa-star"></i> Livres en Vedette</h2>
-            <div class="books-grid">
-                <!-- Book Card 1 -->
-                <div class="book-card" data-title="Principes d'économie" data-author="Gregory Mankiw" data-category="Général">
-                    <img src="images/mankiw.jpg" alt="Couverture de Principes d'économie" loading="lazy">
-                    <h3>Principes d'économie</h3>
-                    <p class="book-author">Gregory Mankiw</p>
-                    <p class="book-year">2019</p>
-                    <a href="pdfs/mankiw.pdf" class="download-btn" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
-                </div>
+    <main class="main-content" role="main">
+        <div class="container">
+            <!-- Featured Books Section -->
+            <section class="featured-section" aria-labelledby="featured-heading">
+                <header class="section-header">
+                    <h2 id="featured-heading"><i class="fas fa-star section-icon"></i> Livres en Vedette</h2>
+                    <p class="section-description">Nos sélections les plus populaires</p>
+                </header>
                 
-                <!-- Book Card 2 -->
-                <div class="book-card" data-title="Économie du développement" data-author="Philippe Hugon" data-category="Développement">
-                    <img src="images/hugon.jpg" alt="Couverture de Économie du développement" loading="lazy">
-                    <h3>Économie du développement</h3>
-                    <p class="book-author">Philippe Hugon</p>
-                    <p class="book-year">2015</p>
-                    <a href="pdfs/hugon.pdf" class="download-btn" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
+                <div class="books-grid" id="booksContainer">
+                    <!-- Book cards will be loaded here dynamically -->
                 </div>
-                
-                <!-- Add more featured books as needed -->
-            </div>
-        </section>
-        
-        <!-- Call to Action -->
-        <section class="contribute-section">
-            <div class="contribute-content">
-                <h2><i class="fas fa-hand-holding-heart"></i> Contribuez à la bibliothèque</h2>
-                <p>Vous avez un livre ou une ressource à partager ? Aidez-nous à enrichir cette bibliothèque pour la communauté !</p>
-                <button class="contribute-btn">Proposer un livre</button>
-            </div>
-        </section>
+            </section>
+            
+            <!-- Call to Action -->
+            <section class="contribute-section" aria-labelledby="contribute-heading">
+                <div class="contribute-card">
+                    <h3 id="contribute-heading"><i class="fas fa-hand-holding-heart"></i> Contribuez à la bibliothèque</h3>
+                    <p>Partagez vos ressources pour enrichir notre collection commune</p>
+                    <button class="button primary-button contribute-button">
+                        <i class="fas fa-plus-circle"></i> Proposer un livre
+                    </button>
+                </div>
+            </section>
+        </div>
     </main>
     
     <!-- Footer -->
-    <footer class="footer">
-        <p>Bibliothèque Économique © 2023 - Tous droits réservés</p>
-        <p>Ressources éducatives gratuites pour la communauté</p>
+    <footer class="footer" role="contentinfo">
+        <div class="container footer-content">
+            <div class="footer-info">
+                <h3 class="footer-title">Bibliothèque Économique</h3>
+                <p>Ressources académiques gratuites pour la communauté francophone</p>
+            </div>
+            <div class="footer-legal">
+                <p>&copy; <span id="footer-year"></span> Tous droits réservés</p>
+                <p class="credits">Conçu avec <i class="fas fa-heart" aria-hidden="true"></i> pour les économistes</p>
+            </div>
+        </div>
     </footer>
     
-    <!-- JavaScript -->
-    <script src="js/main.js?v=20230727"></script>
+    <!-- Chargement asynchrone du JavaScript -->
+    <script src="js/main.js?v=20230727" defer></script>
 </body>
 </html>
